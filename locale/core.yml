@@ -1,263 +1,1043 @@
 core:
-
-  ##
-  # UNIQUE KEYS - The following keys are used in only one location each.
-  ##
-
-  # Translations in this namespace are used by the admin interface.
   admin:
-
-    # These translations are used in the placeholder Add Extension modal dialog.
-    add_extension:
-      developer_text: "Ha fejlesztő vagy, bátran olvasd el <a>dokumentációnkat</a> és készítsd el a saját kiegészítődet."
-      install_text: "Addig is a <a>Flarum Community oldalán</a> kereshetsz és telepíthetsz is kiegészítőket (manuálisan, a Composer segítségével)."
-      temporary_text: "Egy nap majd - a nem túl távoli jövőben - ennek a panelnak a segítségével könnyedén fogsz majd tudni kiegészítőket hozzáadni a fórumodhoz."
-      title: Kiegészítő hozzáadása
-
-    # These translations are used in the Appearance page.
+    advanced:
+      description: Haladó beállítások konfigurálása a fórumodhoz.
+      maintenance:
+        bisect:
+          begin_button_text: Bisect indítása
+          continue_button_text: Bisect folytatása
+          label: Bővítmény Bisect
+          help: Segít azonosítani a problémát okozó bővítményt. Ez automatikusan karbantartási módba (alacsony) helyezi a fórumot a folyamat végéig.
+        bisect_modal:
+          description: |
+            Ez karbantartási módba (alacsony) helyezi a fórumot a folyamat végéig. Minden lépésben néhány bővítmény ki lesz kapcsolva, amíg meg nem találjuk a problémát okozót. Ne lepődjön meg, ha hiányzó funkciókat vagy eltérő témát lát. Tartsa nyitva ezt az oldalt, és próbálja reprodukálni a hibát minden lépés után egy külön oldalon. Bármikor visszatérhet erre az oldalra, ha véletlenül bezárta.
+            
+          end_button: Bezárás és ugrás a bővítmények oldalra
+          issue_question: Még mindig fennáll a probléma?
+          issue_question_help: Próbálja reprodukálni a hibát egy külön oldalon és válaszoljon az eredmény alapján.
+          no_button: Nem
+          result_description: |
+            A fórum már nincs karbantartási módban. A bővítmény bisect befejeződött. A válaszai alapján a probléma oka a következő bővítmény:
+            
+          start_button: Bisect indítása
+          stop_button: Bisect leállítása
+          steps_left: "Hátralévő lépések: {steps}"
+          total_steps: "Ez körülbelül {steps} lépést vesz igénybe."
+          title: Bővítmény Bisect
+          yes_button: Igen
+        config_override:
+          label: A <code>config.php</code> fájlod felülírja ezeket a beállításokat.
+          help: Itt is megváltoztathatod ezeket a beállításokat, de nem lépnek életbe, amíg az <code>offline</code> értéket <code>0</code>-ra nem állítod a <code>config.php</code> fájlban.
+        help: Helyezd karbantartási módba a fórumod, hogy megakadályozd a felhasználók hozzáférését.
+        options:
+          none: Nincs karbantartás.
+          high: Magas karbantartási mód. Senki sem férhet hozzá a fórumhoz (csak a config.php-n keresztül engedélyezhető)
+          low: Alacsony karbantartási mód. Az adminisztrátorok hozzáférhetnek a fórumhoz.
+          safe: Biztonságos mód. Egyetlen bővítmény sem töltődik be és csak az adminisztrátorok férhetnek hozzá a fórumhoz.
+        safe_mode_extensions: Biztonságos módban betölthető bővítmények
+        safe_mode_extensions_override_help: "Ezt a beállítást felülírja a <code>safe_mode_extensions</code> kulcs a <code>config.php</code> fájlban. (<b>{extensions}</b>)"
+        section_label: Karbantartás
+      pgsql:
+        search_configuration: Használandó keresési konfiguráció
+      search:
+        section_label: Keresési meghajtók
+        driver_heading: "Keresési meghajtó: {model}"
+        driver_text: Válaszd ki a modellhez használandó keresési meghajtót.
+        driver_options:
+          default: Alapértelmezett adatbázis keresés
+        no_other_drivers: Még nincsenek elérhető keresési meghajtók. Telepíts egy keresési meghajtó bővítményt a konfiguráláshoz.
+      title: Haladó
     appearance:
+      allow_user_color_scheme_label: Engedélyezd a felhasználóknak saját színséma választását
       colored_header_label: Színes fejléc
       colors_heading: Színek
-      colors_text: "Válassz két színt a fórumodhoz. Az első szín kiemeléseknél lesz használatban, míg a második a háttérelemek színét fogja megadni."
+      colors_primary_label: Elsődleges szín
+      colors_secondary_label: Másodlagos szín
+      colors_text: Válassz két színt a fórumod témájához. Az első a kiemelésekhez, a második a háttérelemekhez lesz használva.
       custom_footer_heading: Egyéni lábléc
       custom_footer_text: => core.ref.custom_footer_text
       custom_header_heading: Egyéni fejléc
       custom_header_text: => core.ref.custom_header_text
-      custom_styles_heading: Egyéni stílus
-      custom_styles_text: "Szabd testre a fórumod kinézetét LESS/CSS kód hozzáadásával, amellyel felülírhatod a Flarum saját stílusát."
-      dark_mode_label: Sötét mód
+      custom_styles_cannot_use_less_features: Az @import és data-uri funkciók nem engedélyezettek az egyéni LESS-ben.
+      custom_styles_heading: Egyéni stílusok
+      custom_styles_text: Testreszabhatod a fórumod megjelenését saját Less/CSS kód hozzáadásával, ami a Flarum alapértelmezett stílusaira épül.
+      description: Testreszabhatod a fórumod színeit, logóit és egyéb változóit.
       edit_css_button: Egyéni CSS szerkesztése
       edit_footer_button: => core.ref.custom_footer_title
       edit_header_button: => core.ref.custom_header_title
       enter_hex_message: Kérlek adj meg egy hexadecimális színkódot.
       favicon_heading: Favicon
-      favicon_text: "Tölts fel egy képet amelyet faviconként szeretnél használni (a böngésző tab-jában megjelenő oldalcím melletti kis kép)."
-      logo_heading: Logo
-      logo_text: Tölts fel egy képet amely a fórumcím helyett fog megjelenni.
-      submit_button: => core.ref.save_changes
-
-    # These translations are used in the Basics page.
+      favicon_text: Tölts fel egy képet, ami a fórum parancsikon ikonjaként jelenik meg.
+      logo_heading: Logó
+      logo_text: Tölts fel egy képet, ami a fórum címe helyett jelenik meg.
+      title: Megjelenés
+      color_scheme_label: Színséma (alapértelmezett)
+      color_schemes:
+        auto_mode_label: Felhasználói rendszer vagy beállított preferencia
+        dark_hc_mode_label: => core.ref.dark_hc_mode_label
+        dark_mode_label: => core.ref.dark_mode_label
+        light_hc_mode_label: => core.ref.light_hc_mode_label
+        light_mode_label: => core.ref.light_mode_label
     basics:
       all_discussions_label: => core.ref.all_discussions
       default_language_heading: Alapértelmezett nyelv
-      forum_description_heading: Fórum leírás
-      forum_description_text: Írj pár mondatot a közösségedről. Ez meg fog jelenni a meta-címkékben és a keresőkben is.
-      forum_title_heading: Fórumcím
-      home_page_heading: Kezdőlap
-      home_page_text: "Válaszd ki az oldalt amelyet a látogatóid először látni fognak, amikor meglátogatják a fórumodat. Ha egyéni értéket adsz meg, akkor használj relatív útvonalat a fórum gyökérmappájához képest."
-      saved_message: A változtatásokat elmentettük.
-      show_language_selector_label: Nyelv-választó mutatása
-      submit_button: => core.ref.save_changes
-      welcome_banner_heading: Üdvözlő banner
-      welcome_banner_text: "Szabd testre a szöveget amellyel köszönteni szeretnéd a látogatóidat az 'Összes téma' lapon."
-
-    # These translations are used in the Dashboard page.
+      description: Állítsd be a fórum címét, nyelvét és egyéb alapbeállításokat.
+      display_name_driver_options:
+        username: Felhasználónév
+      display_name_heading: Felhasználó megjelenítendő neve
+      display_name_text: Válaszd ki a felhasználók megjelenítendő nevéhez használt meghajtót. Alapértelmezetten a felhasználónév jelenik meg.
+      forum_description_heading: Fórum leírása
+      forum_description_text: Adj meg egy rövid mondatot vagy kettőt, ami leírja a közösségedet. Ez a meta címkében jelenik meg és a keresőmotorokban.
+      forum_title_heading: Fórum címe
+      home_page_heading: Kezdőoldal
+      home_page_text: Válaszd ki az oldalt, amit a felhasználók először látnak a fórumod meglátogatásakor.
+      show_language_selector_label: Nyelv választó megjelenítése
+      slug_driver_options:
+        discussions:
+          default: ID slug-gal
+          utf8: ID UTF-8 slug-gal
+        users:
+          default: Felhasználónév
+          id: ID
+      slug_driver_heading: "Slug meghajtó: {model}"
+      slug_driver_text: Válaszd ki a modellhez használandó slug meghajtót.
+      title: Alapok
+      welcome_banner_heading: Üdvözlő szalag
+      welcome_banner_text: Állítsd be a szöveget, ami az Összes beszélgetés oldalon megjelenik. Használd vendégeid üdvözlésére.
+    create_user:
+      email_placeholder: => core.ref.email
+      email_confirmed_label: A felhasználónak meg kell erősítenie ezt az email címet
+      password_placeholder: => core.ref.password
+      submit_and_create_another_button: Létrehozás és új hozzáadása
+      submit_button: Felhasználó létrehozása
+      title: Új felhasználó létrehozása
+      use_random_password: Véletlenszerű jelszó generálása
+      username_placeholder: => core.ref.username
     dashboard:
-      clear_cache_button: Cache törlése
+      clear_cache_button: Gyorsítótár törlése
+      description: A fórumod áttekintése.
+      io_error_message: Nem sikerült írni a fájlrendszerbe. Ellenőrizd a fájlrendszer jogosultságait és próbáld újra. Vagy próbáld parancssorból.
+      status:
+        headers:
+          scheduler-status: Ütemező
+          queue-driver: Várólista meghajtó
+          session-driver: Munkamenet meghajtó
+        scheduler:
+          active: Aktív
+          inactive: Inaktív
+          never-run: Még nem futott
+      title: Vezérlőpult
+      toggle_advanced_page_button: Haladó oldal váltása
       tools_button: Eszközök
-
-    # These translations are used in the Edit Custom CSS modal dialog.
+    debug-warning:
+      detail: |
+        Ha a <code>debug</code> mód aktív, a Flarum újraépíti a <code>JavaScript</code> és <code>CSS</code> eszközeit minden kérésnél, és más információkat is kiszivárogtathat, mint adatbázis titkokat, környezeti változókat stb.
+        
+        Erősen ajánlott kikapcsolni a <code>debug</code> módot a <code>config.php</code> fájlban éles környezetben. További információért lásd a <link>Flarum dokumentációt</link>.
+        
+      label: Debug mód aktív
     edit_css:
-      customize_text: "Szabd testre a fórumod kinézetét LESS/CSS kód hozzáadásával, amellyel felülírhatod a Flarum <a>saját, alapértelmezett stílusát</a>."
+      customize_text: Testreszabhatod a fórumod megjelenését saját Less/CSS kód hozzáadásával a Flarum <a>alapértelmezett stílusaira</a> építve.
       submit_button: => core.ref.save_changes
       title: Egyéni CSS szerkesztése
-
-    # These translations are used in the Edit Custom Footer modal dialog.
     edit_footer:
       customize_text: => core.ref.custom_footer_text
       submit_button: => core.ref.save_changes
       title: => core.ref.custom_footer_title
-
-    # These translations are used in the Edit Group modal dialog.
     edit_group:
       color_label: => core.ref.color
       delete_button: Csoport törlése
-      delete_confirmation: "Biztosan törölni szeretnéd ezt a csoportot? A csoport tagjai NEM lesznek törölve."
+      delete_confirmation: Biztosan törölni szeretnéd ezt a csoportot? A csoport tagjai NEM lesznek törölve.
+      hide_label: Elrejtés a fórumon
       icon_label: => core.ref.icon
       icon_text: => core.ref.icon_text
       name_label: Név
-      plural_placeholder: Többesszám (pl.":" Moderátorok)
-      singular_placeholder: Egyesszám (pl.":" Moderátor)
+      plural_placeholder: Többes szám (pl. Moderátorok)
+      singular_placeholder: Egyes szám (pl. Moderátor)
       submit_button: => core.ref.save_changes
       title: Csoport létrehozása
-
-    # These translations are used in the Edit Custom Header modal dialog.
     edit_header:
       customize_text: => core.ref.custom_header_text
       submit_button: => core.ref.save_changes
       title: => core.ref.custom_header_title
-
-    # These translations are used in the email page of the admin interface.
     email:
       addresses_heading: Címek
-      driver_heading: Válassz egy driver-t
-      driver_label: Driver
+      description: Állítsd be a meghajtót, beállításokat és címeket, amiket a fórumod emailek küldéséhez használ.
+      driver_heading: Válassz meghajtót
+      driver_label: Meghajtó
+      format:
+        multipart_option: Multipart (ajánlott)
+        plain_option: Egyszerű szöveg
+        html:
+        body: "{replier_display_name} válaszolt a hozzászólásodra (#{post_number}) itt: [{title}]({url})."
+    user_mentioned:
+      subject: "{mentioner_display_name} megemlített téged itt: {title}"
+      plain:
+        body: |
+          {mentioner_display_name} megemlített téged egy hozzászólásban itt: "{title}."
+          
+          {url}
+          
+          ---
+          
+          {content}
+          
+      html:
+        body: "{mentioner_display_name} megemlített téged egy hozzászólásban itt: [{title}]({url})."
+    group_mentioned:
+      subject: "{mentioner_display_name} megemlített egy csoportot, aminek tagja vagy itt: {title}"
+      plain:
+        body: |
+          {mentioner_display_name} megemlített egy csoportot, aminek tagja vagy itt: "{title}."
+          
+          {url}
+          
+          ---
+          
+          {content}
+          
+      html:
+        body: "{mentioner_display_name} megemlített egy csoportot, aminek tagja vagy itt: [{title}]({url})."
+  lib:
+    gambits:
+      posts:
+        mentioned:
+          key: megemlített
+          hint: A megemlített felhasználó ID-ja vagy felhasználóneve
+flarum-markdown:
+  lib:
+    composer:
+      bold_tooltip: Félkövér szöveg hozzáadása
+      code_tooltip: Kód beszúrása
+      header_tooltip: Címsor hozzáadása
+      image_tooltip: Kép hozzáadása
+      italic_tooltip: Dőlt szöveg hozzáadása
+      link_tooltip: Link hozzáadása
+      ordered_list_tooltip: Számozott lista hozzáadása
+      quote_tooltip: Idézet beszúrása
+      spoiler_tooltip: Spoiler beszúrása
+      strikethrough_tooltip: Áthúzott szöveg hozzáadása
+      unordered_list_tooltip: Felsorolásos lista hozzáadása
+flarum-lock:
+  admin:
+    permissions:
+      lock_discussions_label: Beszélgetések lezárása
+  forum:
+    badge:
+      locked_tooltip: Lezárva
+    discussion_controls:
+      lock_button: Lezárás
+      unlock_button: Feloldás
+    notifications:
+      discussion_locked_text: "{username} lezárta"
+    post_stream:
+      discussion_locked_text: "{username} lezárta a beszélgetést {time}."
+      discussion_unlocked_text: "{username} feloldotta a beszélgetést {time}."
+    settings:
+      notify_discussion_locked_label: Valaki lezárja az általam indított beszélgetést
+  lib:
+    gambits:
+      discussions:
+        locked:
+          key: lezárt
+flarum-likes:
+  admin:
+    permissions:
+      like_posts_label: Hozzászólások kedvelése
+    settings:
+      like_own_posts_help: Ha engedélyezve van, a jogosultságtól függően a felhasználók kedvelhetik saját hozzászólásaikat a fórumon. A saját hozzászólások kedvelésének megakadályozásához kapcsold ki ezt a beállítást.
+      like_own_posts_label: A felhasználók kedvelhetik saját hozzászólásaikat
+  forum:
+    notifications:
+      others_text: => core.ref.some_others
+      post_liked_text: "{username} kedvelte a hozzászólásodat"
+    post:
+      like_link: Kedvelés
+      liked_by_self_text: "{users} kedveli ezt."
+      liked_by_text: "{count, plural, one {{users} kedveli ezt} other {{users} kedvelik ezt}}."
+      others_link: => core.ref.some_others
+      unlike_link: Kedvelés visszavonása
+      you_text: => core.ref.you
+    post_likes:
+      title: Akik kedvelik ezt
+      load_more_button: => core.ref.load_more
+    settings:
+      notify_post_liked_label: Valaki kedveli egy hozzászólásomat
+    user:
+      likes_link: Kedvelések
+  lib:
+    gambits:
+      posts:
+        likedBy:
+          key: kedvelte
+          hint: A felhasználó ID-ja vagy felhasználóneve
+flarum-gdpr:
+  admin:
+    gdpr_page:
+      heading: GDPR adatok áttekintése
+      description: Különböző GDPR műveletek és integrációk állapota
+      data_types:
+        title: Adattípusok
+        help_text: |
+          Ezek a jelenleg regisztrált adattípusok. Minden típus a hozzá kapcsolódó exportálási, anonimizálási és törlési műveletekkel együtt van felsorolva. Ha egy bővítmény GDPR szabályozás alá eső adatokat kezel, regisztrálnia kell az adattípusait a <code>flarum/gdpr</code> bővítménnyel.
+          A <code>user</code> táblában tárolt adatok külön kezelődnek, lásd alább a felhasználói tábla adatokat.
+          
+        type: Típus
+        export_description: Exportálási művelet
+        anonymize_description: Anonimizálási művelet
+        delete_description: Törlési művelet
+        extension: Bővítmény
+      settings:
+        heading: GDPR beállítások
+        help_text: GDPR beállításokat keresel? A bővítmény oldalán találhatók.
+        extension_settings_button: GDPR beállítások
+      user_table_data:
+        not_yet_implemented: Még nem implementált
+        title: Felhasználói tábla adatai
+        help_text: |
+          Általánosságban a <code>user</code> táblához adott oszlopok automatikusan kezelődnek, mind az adatok exportálásakor, mind a törlésnél.
+          Azonban vannak speciális esetek, amelyek alább láthatók.
+          
+    nav:
+      gdpr_button: GDPR integrációk
+      gdpr_title: => flarum-gdpr.admin.gdpr_page.description
+    permissions:
+      process_erasure: Törlési kérelmek feldolgozása
+      process_export_for_others: Adatexport kérése és fogadása más felhasználók számára
+      see_anonymized_user_badges: Anonimizált felhasználói jelvények megtekintése
+    settings:
+      allow_anonymization: Anonimizálás engedélyezése törlési kérelmeknél
+      allow_anonymization_help: Az alapértelmezett opció, a legtöbb közösség számára ajánlott. Ebben a módban a hozzászólások/megjegyzések a GDPR által megengedett mértékben megőrződnek, de minden felhasználó-azonosítható információ eltávolításra kerül.
+      allow_deletion: Törlés engedélyezése törlési kérelmeknél
+      allow_deletion_help: Sokkal szigorúbb opció. Ebben a módban minden hozzászólás/megjegyzés törlődik, és a felhasználó eltávolításra kerül az adatbázisból. Óvatosan használd.
+      default_anonymous_username: Alapértelmezett felhasználónév anonimizált felhasználóknak
+      default_anonymous_username_help: Amikor egy felhasználó anonimizálva van, a felhasználóneve lecserélődik erre az értékre, plusz az anonimizálási kérelem ID-ja, például <code>Anonymous123</code>.
+      default_erasure: Alapértelmezett művelet törlési kérelmeknél
+      default_erasure_help: Mi legyen az alapértelmezett művelet törlési kérelmeknél?
+      default_erasure_options:
+        anonymization: Anonimizálás
+        deletion: Törlés
+      gdpr_page:
+        title: Adatintegráció és műveletek
+        help_text: Mielőtt eldöntöd, mely műveleteket használod a fórumodon, létfontosságú megérteni, mely adatok vannak integrálva, és hogyan kezelődnek anonimizálás és törlés esetén. Látogasd meg a GDPR áttekintést, hogy megértsd az adatkezelést, és mely opcionális bővítmények regisztrálták adataikat ezen bővítmény általi kezelésre.
+    userlist:
+      columns:
+        user_actions:
+          data_export:
+            button: Exportálás
+            tooltip: "{username} adatainak exportálása"
+  lib:
+    data:
+      avatar:
+        delete_description: Törli a felhasználó avatarját a fájlrendszerből.
+        export_description: Lekéri a felhasználó avatarját a fájlrendszerből és belefoglalja az exportba.
+      discussions:
+        export_description: Exportálja az összes beszélgetést, amit a felhasználó indított. Az adatok a címre és létrehozási dátumra korlátozódnak.
+      forum:
+        export_description: Exportálja a fórum címét, url-jét, felhasználónevet, emailt és az aktuális dátumot.
+      no_action: Nincs művelet végrehajtva.
+      posts:
+        anonymize_description: Eltávolítja az IP címet minden hozzászólásból, amit a felhasználó írt.
+        delete_description: Törli az összes hozzászólást, amit a felhasználó írt.
+        export_description: Exportálja az összes hozzászólást, amit a felhasználó írt. Az adatok a tartalomra, létrehozási dátumra, IP címre és beszélgetés ID-ra korlátozódnak.
+      tokens:
+        delete_description: Törli az összes tokent, amit a felhasználó létrehozott.
+        export_description: Exportálja az összes tokent, amit a felhasználó létrehozott. Az adatok a létrehozási dátumra és token típusra korlátozódnak.
+      user:
+        anonymize_description: Minden oszlopot null-ra állít a felhasználói táblában. A nem nullable oszlopok alapértelmezett vagy speciális értékekre állítódnak. A jelszó megváltozik, a preferenciák alapértelmezettre állnak és minden csoport eltávolításra kerül.
+        delete_description: Törli a felhasználót az adatbázisból.
+        export_description: Exportálja az adatokat a felhasználói táblából. Minden oszlop az id és password kivételével.
+    request_data:
+      title: "Adatok kérése {username} számára"
+      text: |
+        Egy zip archívum készül számodra. Amint elkészült, értesítést kapsz egy letöltési linkkel. A link egy napig marad aktív.
+        
+      request_button: Archívum kérése
+  email:
+    confirm_erasure:
+      subject: Erősítsd meg a fiók törlési kérelmedet
+      body: |
+        Valaki (remélhetőleg te) a `{display_name}` fiók törlését kérte.
+        
+        A művelet megerősítéséhez kérlek kövesd a következő linket, ezután a kérelmedet a csapatunk feldolgozza.
+        
+        {erasure_confirm_url}
+        
+    erasure_completed:
+      deletion:
+        subject: Fiók törlése befejezve
+        body: |
+          Ez egy automatikus, végleges értesítés arról, hogy a fiókod törölve lett.
+          
+      anonymization:
+        subject: Fiók anonimizálása befejezve
+        body: |
+          Ez egy automatikus, végleges értesítés arról, hogy a fiókod anonimizálva lett.
+          
+    erasure_cancelled:
+      subject: Fiók törlési kérelem visszavonva
+      body: |
+        Ez egy automatikus értesítés arról, hogy a fiók törlés visszavonási kérelmed feldolgozva lett.
+        
+        A fiókod már nem lesz törölve.
+        
+    export_available:
+      subject: Adatexport elérhető
+      body: |
+        {username} fiókadatainak exportját kérted. Az export sikeresen elkészült és már elérhető:
+        
+        {url}
+        
+        Ez az export {destroys_at} időpontig marad elérhető.
+        
+  forum:
+    badges:
+      anonymized_user: Anonimizált felhasználó
+    delete_user:
+      title: "{username} fiókjának törlése"
+      text: |
+        Biztosan törölni szeretnéd {username} fiókját?
+        
+        Ez a művelet visszafordíthatatlan.
+        
+      modal_delete_button: Törlés alapértelmezett művelettel
+      delete_button: Törlés
+    erasure_requests:
+      empty_text: Nincsenek függő fiók törlési kérelmek
+      item_text: "{name} fiók törlést kért"
+      tooltip: Fiók törlési kérelmek
+      title: Fiók törlési kérelmek
+    erasure_request_confirmed: Megerősítetted a fiók törlési kérelmedet. A művelet 30 napon belül végrehajtásra kerül, ahogy a GDPR megköveteli.
+    settings:
+      data:
+        heading: Személyes adatok
+      export_data_button: Adatok exportálása
+      export_data_help: Az adatexport kérése letölthető másolatot biztosít a fiókodhoz kapcsolódó összes információról. Ez tartalmazza a hozzászólásokat, megjegyzéseket és profiladatokat.
+      request_erasure_button: Fiók törlése
+      request_erasure_help: A törlés kérése véglegesen törli a fiókodat és minden kapcsolódó adatot. Ez a művelet visszafordíthatatlan. Mielőtt folytatnád, győződj meg róla, hogy elmentetted minden tartalmat, amit meg szeretnél tartani.
+    process_erasure:
+      confirm: "Biztosan törölni szeretnéd {name} fiókját {mode} módban?"
+      title: Törlési kérelem feldolgozása
+      text: "{name} fiók törlést kért."
+      comments_label: Megjegyzések (opcionális)
+      anonymization_button: Felhasználó anonimizálása
+      deletion_button: Felhasználó törlése
+    request_erasure:
+      title: Fiók törlés kérése
+      reason: "A következő okot adtad meg: {reason}"
+      status:
+        awaiting_user_confirmation: |
+          Kaptál egy emailt a fiók törlési kérelmed megerősítésére.
+          
+        user_confirmed: |
+          Megerősítetted a fiók törlési kérelmedet. A művelet 30 napon belül végrehajtásra kerül, ahogy a GDPR megköveteli.
+          
+      text: A fogadás és megerősítés után egy adminisztrátor felülvizsgálja a kérelmedet 30 napon belül, ahogy a GDPR megköveteli.
+      password_label: Jelszó megerősítése
+      reason_label: Ok (opcionális)
+      cancel_button: Kérelem visszavonása
+      request_button: Törlés kérése
+    notification:
+      export-ready: "{username} adatexportja most már letölthető."
+    export_file: "{username} ({email}) felhasználó adatainak exportja készült {date} időpontban a(z) {forumTitle} ({url}) fórumról"
+flarum-extension-manager:
+  admin:
+    auth_config:
+      add_label: Új hitelesítési módszer
+      add_modal:
+        host_label: Kiszolgáló
+        host_placeholder: példa: bearer.flarum.org
+        submit_button: Küldés
+        token_label: Token
+        type_label: Típus
+        unchanged_token_placeholder: (változatlan)
+      delete_confirmation: Biztosan törölni szeretnéd ezt a hitelesítési módszert?
+      delete_label: Hitelesítési módszer törlése
+      edit_label: Hitelesítési módszer szerkesztése
+      fields:
+        host: Kiszolgáló
+        token: Token
+      no_auth_methods_configured: Nincsenek konfigurált hitelesítési módszerek. Ez egy opcionális haladó funkció privát tárolókból való telepítés engedélyezéséhez.
+      remove_button_label: Hitelesítési módszer eltávolítása
+      title: Hitelesítési módszerek
+      types:
+        github-oauth: GitHub OAuth
+        gitlab-oauth: GitLab OAuth
+        gitlab-token: GitLab Token
+        bearer: HTTP Bearer
+    composer:
+      add_repository_label: Tároló hozzáadása
+      delete_repository_confirmation: Biztosan törölni szeretnéd ezt a tárolót? Minden ebből a tárolóból telepített bővítmény eltávolításra kerül.
+      delete_repository_label: Tároló törlése
+      edit_repository_label: Tároló szerkesztése
+      title: Composer
+      minimum_stability:
+        label: Minimális stabilitás
+        help: A telepíthető csomagok típusa. Ne változtasd meg, hacsak nem tudod, mit csinálsz.
+        options:
+          stable: Stabil (Ajánlott)
+          rc: Kiadásra jelölt
+          beta: Béta
+          alpha: Alfa
+          dev: Fejlesztői
+      repositories:
+        label: Tárolók
+        help: |
+          További tárolók hozzáadása csomagok telepítéséhez. Ez egy haladó funkció, ne adj hozzá nem megbízható tárolókat, mivel rosszindulatú kód végrehajtására használhatók a szervereden.
+          
+        types:
+          composer: composer
+          vcs: vcs
+          path: útvonal
+        add_modal:
+          name_label: Név
+          type_label: Típus
+          url: URL
+          submit_button: Küldés
+    exceptions:
+      composer_command_failure: Végrehajtás sikertelen. Ellenőrizd a composer naplókat a storage/logs/composer mappában.
+      extension_already_installed: A bővítmény már telepítve van.
+      extension_not_directly_dependency: A bővítmény egy másik bővítmény függőségeként van telepítve, közvetlenül nem távolítható el.
+      extension_not_installed: Bővítmény nem található.
+      guessed_cause:
+        extension_incompatible_with_instance: A bővítmény valószínűleg nem kompatibilis a jelenlegi Flarum példányoddal.
+        extension_not_found: A bővítmény nem található vagy nem létezik.
+        extensions_incompatible_with_new_major: |
+          Néhány telepített bővítmény nem kompatibilis a legújabb fő kiadással. Kérlek várj, amíg a bővítmények szerzői frissítik őket kompatibilisre, vagy távolítsd el őket a folytatás előtt.
+          
+    extensions:
+      check_why_it_failed_updating: Mutasd meg, miért nem frissült a legújabbra.
+      install: Új bővítmény telepítése
+      install_help: |
+        Add meg a bővítmény csomag nevét a folytatáshoz. Megadhatsz <semantic_link>szemantikus verziót</semantic_link> a <code>vendor/package-name:"version</code> formátumban. Látogasd meg a {link} oldalt bővítmények böngészéséhez."
+        
+      proceed: Folytatás
+      remove: Eltávolítás
+      successful_install: "{extension} sikeresen telepítve, átirányítás..."
+      successful_remove: Bővítmény sikeresen eltávolítva.
+      successful_update: "{extension} sikeresen frissítve, átirányítás..."
+      update: Frissítés
+      update_soft_label: Lágy frissítés
+      update_hard_label: Kemény frissítés
+    file_permissions: |
+      A bővítménykezelő olvasási és írási jogosultságot igényel a következő fájlokhoz és könyvtárakhoz: composer.json, composer.lock, vendor, storage, storage/.composer
+      
+    major_updater:
+      description: |
+        A fő Flarum frissítések nem visszafelé kompatibilisek, ami azt jelenti, hogy néhány jelenleg telepített bővítményed és kézi módosításaid esetleg nem fognak működni ezzel az új verzióval. Kérlek készíts biztonsági mentést az adatbázisodról és fájljaidról a folytatás előtt.
+        
+      dry_run: Száraz futtatás
+      dry_run_help: A száraz futtatás szimulálja a frissítést, hogy lásd, a jelenlegi beállításod biztonságosan frissíthető-e. Ez nem jelenti azt, hogy a kézi egyéni módosításaid működni fognak az újabb verzióban.
+      failure:
+        desc: Az utolsó fő frissítés sikertelen volt, néhány telepített bővítmény nem kompatibilis az új fő kiadással.
+        why: Tudj meg többet
+      title: "Flarum {version} fő frissítés elérhető"
+      update: Frissítés
+    minor_update_confirmation:
+      content: Ez frissíti az összes többi bővítményt/csomagot is, amikhez elérhető frissítés.
+    required_php_functions: |
+      "A bővítménykezelő a következő PHP függvények engedélyezését igényli: <code>{functions}</code>. Ha nincs hozzáférésed a PHP konfigurációhoz, kérlek lépj kapcsolatba a tárhelyszolgáltatóddal."
+      
+    sections:
+      discover:
+        description: Adj új funkciókat és integrációkat a Flarum fórumodhoz bővítményekkel.
+        empty_results: Úgy tűnik, nincsenek elérhető bővítmények.
+        extension:
+          badges:
+            compatible: Kompatibilis
+            fof: Friends Of Flarum
+            flarum: Flarum
+            incompatible: Nem kompatibilis
+            premium: Prémium
+            unstable: Instabil
+          downloads: "{count, plural, one {{formattedCount} letöltés} other {{formattedCount} letöltés}}"
+        premium_extension_terms: Prémium bővítmény feltételek
+        search: Keresés...
+        server_error: A szolgáltatás jelenleg nem elérhető, kérlek próbáld később.
+        sort:
+          toggle_dropdown_accessible_label: Rendezési opciók váltása
+          top: Legtöbb letöltés
+          latest: Legújabb
+        tabs:
+          discover: Felfedezés
+          extensions: Bővítmények
+          languages: Nyelvek
+          themes: Témák
+        title: Bővítmények
+        party_filter:
+          all: Összes
+          premium: Prémium
+          toggle_dropdown_accessible_label: Fél szűrő váltása
+      queue:
+        columns:
+          details: Részletek
+          elapsed_time: Befejezve
+          peak_memory_used: Csúcs memóriahasználat
+          operation: Művelet
+          package: Csomag
+          status: Állapot
+        none: Még nincsenek feladatok.
+        operations:
+          extension_install: Bővítmény telepítése
+          extension_remove: Bővítmény eltávolítása
+          extension_update: Bővítmény frissítése
+          update_check: Frissítések ellenőrzése
+          update_global: Összes szoftvercsomag frissítése
+          update_major: Fő frissítés
+          update_minor: Kisebb frissítés
+          why_not: Analizáld, miért nem frissíthető egy csomag
+        output_modal:
+          cause_unknown: Ismeretlen
+          command: Composer parancs
+          guessed_cause: Ok
+          output: Kimenet
+        refresh: Feladatlista frissítése
+        statuses:
+          success: Sikeres
+          failure: Sikertelen
+          pending: Függőben
+          running: Fut
+        task_just_started: A feladat épp elkezdődött
+        title: Várólista
+      settings:
+        title: Opciók és várólista
+        description: Konfiguráld a bővítménykezelőt és ellenőrizd a várólistán lévő műveleteket.
+    settings:
+      title: => core.ref.settings
+      access_warning: Kérlek légy óvatos, kinek adsz hozzáférést az admin területhez, a bővítménykezelőt rosszindulatú szereplők visszaélhetnek csomagok telepítésére, amelyek biztonsági résekhez vezethetnek.
+      debug_mode_warning: Debug módban futsz, a bővítménykezelő nem tudja megfelelően telepíteni és frissíteni a helyi fejlesztői csomagokat. Kérlek használd a parancssori felületet ilyen célokra.
+      queue_jobs: Műveletek futtatása háttér várólistában
+      queue_jobs_help: |
+        Olvashatsz egy <basic_impl_link>alapvető várólista</basic_impl_link> implementációról vagy egy <adv_impl_link>fejlettebb</adv_impl_link> megoldásról. Győződj meg róla, hogy a várólistához használt PHP verzió {php_version}. Győződj meg róla, hogy a <folder_perms_link>mappa jogosultságok</folder_perms_link> megfelelően vannak konfigurálva.
+        
+      task_retention_days: Feladat megőrzési napok
+      task_retention_days_help: |
+        A befejezett feladatok megőrzési napjainak száma az adatbázisban. Az ennél régebbi feladatok törölve lesznek. Állítsd 0-ra az összes feladat megtartásához.
+        
+    updater:
+      up_to_date: Nincsenek függő frissítések.
+      check_for_updates: Frissítések ellenőrzése
+      flarum: Flarum mag
+      global_update_successful: Sikeresen frissítetted az összes csomagot.
+      last_update_checked_at: "Utolsó frissítés ellenőrzés: "
+      run_global_update: Globális frissítés futtatása
+      updater_title: Frissítések
+      updater_help: Ellenőrzi az új bővítmény és Flarum frissítéseket.
+    update_successful: Flarum sikeresen frissítve.
+    why_not_modal:
+      title: Miért nem frissül
+flarum-bbcode:
+  forum:
+    quote:
+      wrote: írta_option: HTML
+      format_heading: Kimenő email formátum
+      format_help: Válaszd ki a kimenő emailek formátumát. Az ajánlott opció a <code>multipart</code>, mivel ez lehetővé teszi a felhasználó email kliensének a legmegfelelőbb formátum megjelenítését.
       from_label: Küldő
-      heading: => core.ref.email
       mail_encryption_label: Titkosítás
-      mail_host_label: Hoszt
+      mail_host_label: Kiszolgáló
       mail_mailgun_domain_label: Domain
       mail_mailgun_region_label: Régió
       mail_mailgun_secret_label: Titkos kulcs
-      mail_mandrill_secret_label: Titkos kulcs
       mail_password_label: => core.ref.password
       mail_port_label: Port
-      mail_ses_key_label: Kulcs
-      mail_ses_region_label: Régió
-      mail_ses_secret_label: Secret
       mail_username_label: => core.ref.username
       mailgun_heading: Mailgun beállítások
-      mandrill_heading: Mandrill beállítások
-      not_sending_message: A Flarum jelenleg nem küld ki emaileket. Ennek oka lehet a kiválasztott driver, vagy a rosszul megadott beállítások.
-      ses_heading: SES beállítások
+      not_sending_message: A Flarum jelenleg nem küld emaileket. Ez lehet a kiválasztott meghajtó vagy annak konfigurációs hibái miatt.
+      send_test_mail_button: Küldés
+      send_test_mail_heading: Teszt email küldése
+      send_test_mail_success: Teszt email sikeresen elküldve!
+      send_test_mail_text: "Ez elküld egy emailt a fenti konfigurációval az email címedre: {email}."
       smtp_heading: SMTP beállítások
-      submit_button: => core.ref.save_changes
-      text: Állítsd be a megfelelő driver-t, a beállításokat és a címeket, hogy a fórumod emaileket tudjon küldeni.
-
-    # These translations are used in the Extensions page.
-    extensions:
-      add_button: Kiegészítő hozzáadása
-      settings_button: => core.ref.settings
-      uninstall_button: Eltávolítás
-
-    # These translations are used in the session dropdown menu.
+      title: => core.ref.email
+    extension:
+      configure_scopes: Hatókörök konfigurálása
+      confirm_purge: A tisztítás eltávolítja a bővítményhez kapcsolódó összes adatbázis bejegyzést és eszközt. Nem távolítja el a bővítményt; azt a Composer-en keresztül kell megtenni. Biztosan folytatni szeretnéd?
+      database_driver_mismatch: Ez a bővítmény nem támogatja a beállított adatbázis meghajtódat.
+      disabled: Letiltva
+      enable_to_see: Engedélyezd a bővítményt a beállítások megtekintéséhez és módosításához.
+      enabled: Engedélyezve
+      info_links:
+        discuss: Megbeszélés
+        documentation: Dokumentáció
+        donate: Adományozás
+        source: Forrás
+        support: Támogatás
+        website: Weboldal
+      no_permissions: Ennek a bővítménynek nincsenek jogosultságai.
+      no_settings: Ennek a bővítménynek nincsenek beállításai.
+      open_modal: Beállítások megnyitása
+      permissions_title: Jogosultságok
+      purge_button: Tisztítás
+      readme:
+        button_label: README
+        no_readme: Úgy tűnik, ennek a bővítménynek nincs README fájlja
+        title: "{extName} dokumentáció"
+      safe_mode_warning: A biztonságos mód jelenleg engedélyezve van. A bővítmények nem töltődnek be, ezért a beállításaik nem elérhetők.
     header:
+      get_help: Segítség kérése
       log_out_button: => core.ref.log_out
-
-    # These translations are used in the modal dialog displayed when loading extensions.
+      search_placeholder: Keresés...
+      search_role_label: Keresés
     loading:
-      title: "Kérlek, várj..."
-
-    # These translations are used in the navigation bar.
+      title: Kérlek várj...
+    models:
+      discussions: => core.ref.discussions
+      posts: => core.ref.posts
+      users: => core.ref.users
     nav:
-      appearance_button: Megjelenés
-      appearance_text: "Szabd testre a fórumod színeit, logóit, stílusait."
-      basics_button: Alapok
-      basics_text: "Itt állíthatod be az alapvető fórum-beállításokat: cím, nyelv, leírás."
-      dashboard_button: Irányítópult
-      dashboard_text: "A kis Flarum-fórumod."
+      advanced_button: => core.admin.advanced.title
+      advanced_title: => core.admin.advanced.description
+      appearance_button: => core.admin.appearance.title
+      appearance_title: => core.admin.appearance.description
+      basics_button: => core.admin.basics.title
+      basics_title: => core.admin.basics.description
+      categories:
+        authentication: Hitelesítés
+        core: Alapbeállítások
+        discussion: Beszélgetés
+        feature: Funkciók
+        formatting: Formázás
+        language: Nyelvek
+        moderation: Moderáció
+        other: Egyéb bővítmények
+        theme: Témák
+      dashboard_button: => core.admin.dashboard.title
+      dashboard_title: => core.admin.dashboard.description
       email_button: => core.ref.email
-      email_text: "Itt tudod beállítani a fórumod email-beállításait."
-      extensions_button: Kiegészítők
-      extensions_text: További funkciókat tudsz a fórumodhoz adni.
-      permissions_button: Jogosultságok
-      permissions_text: Állítsd be, hogy ki milyen jogokkal rendelkezzen és ezekkel a jogokkal mit tehessen.
-
-    # These translations are used in the Permissions page of the admin interface.
+      email_title: => core.admin.email.description
+      permissions_button: => core.admin.permissions.title
+      permissions_title: => core.admin.permissions.description
+      userlist_button: => core.admin.users.title
+      userlist_title: => core.admin.users.description
+      search_placeholder: Bővítmények keresése
     permissions:
-      allow_post_editing_label: Posztok szerkesztésének engedélyezése
+      allow_hide_own_posts_label: Saját hozzászólások törlésének engedélyezése
+      allow_post_editing_label: Hozzászólás szerkesztés engedélyezése
       allow_renaming_label: Átnevezés engedélyezése
+      create_access_token_label: Hozzáférési token létrehozása
       create_heading: Létrehozás
-      delete_discussions_forever_label: Téma végleges törlése
-      delete_discussions_label: Téma törlése
-      delete_posts_forever_label: Poszt végleges törlése
-      delete_posts_label: Posztok törlése
-      edit_posts_label: Posztok szerkesztése
-      edit_users_label: Felhasználók szerkesztése
+      delete_discussions_forever_label: Beszélgetések végleges törlése
+      delete_discussions_label: Beszélgetések törlése
+      delete_posts_forever_label: Hozzászólások végleges törlése
+      delete_posts_label: Hozzászólások törlése
+      description: Állítsd be ki mit láthat és tehet.
+      edit_posts_label: Hozzászólások szerkesztése
+      edit_users_label: Felhasználói attribútumok szerkesztése
+      edit_users_credentials_label: Felhasználói hitelesítő adatok szerkesztése
+      edit_users_groups_label: Felhasználói csoportok szerkesztése
       global_heading: Globális
       moderate_heading: Moderálás
+      moderate_access_tokens_label: Hozzáférési tokenek moderálása
       new_group_button: Új csoport
-      participate_heading: Közreműködés
-      post_without_throttle_label: Válasz küldése több alkalommal várakozás nélkül
+      participate_heading: Részvétel
+      post_without_throttle_label: Többszöri válasz várakozás nélkül
       read_heading: Olvasás
-      rename_discussions_label: Téma átnevezése
-      reply_to_discussions_label: Válaszolás egy témához
+      remove_scope_label: "{scope} hatókör eltávolítása"
+      rename_discussions_label: Beszélgetések átnevezése
+      reply_to_discussions_label: Válasz beszélgetésekre
+      search_users_label: => core.ref.search_users
       sign_up_label: Regisztráció
-      start_discussions_label: Téma indítása
-      view_discussions_label: Témák megtekintése
-      view_last_seen_at_label: Utolsó látogatás idejének megtekintése
-      view_post_ips_label: IP-címek megtekintése
-      view_user_list_label: Tagok listájának megtekintése
-
-    # These translations are used in the dropdown menus on the Permissions page.
+      start_discussions_label: Beszélgetések indítása
+      title: Jogosultságok
+      view_forum_label: Fórum megtekintése (beszélgetések és felhasználók)
+      view_hidden_groups_label: Rejtett csoport jelvények megtekintése
+      view_last_seen_at_label: Felhasználó utoljára látott idejének megtekintése
+      view_post_ips_label: Hozzászólás IP címek megtekintése
     permissions_controls:
-      allow_indefinitely_button: Korlátlan ideig
-      allow_some_minutes_button: "{count} percig|{count} percig"
+      allow_indefinitely_button: Korlátlanul
+      allow_never_button: => core.ref.never
+      allow_some_minutes_button: "{count, plural, one {# percig} other {# percig}}"
       allow_ten_minutes_button: 10 percig
-      allow_until_reply_button: A következő válaszig
+      allow_until_reply_button: Következő válaszig
       everyone_button: Mindenki
       members_button: => core.group.members
       signup_closed_button: Zárva
       signup_open_button: Nyitva
-
-    # These translations are used in the Settings modal dialog.
+    search_source:
+      general:
+        heading: Általános
     settings:
+      saved_message: A változtatásaid mentve lettek.
+      select_dropdown_custom_label: Egyéni
       submit_button: => core.ref.save_changes
-
-    # These translations are used in image upload buttons.
     upload_image:
       remove_button: => core.ref.remove
       upload_button: Válassz egy képet...
-
-  # Translations in this namespace are used by the forum user interface.
+    users:
+      create_user_button: Új felhasználó
+      description: A fórumod összes felhasználójának lapozható listája.
+      grid:
+        columns:
+          display_name:
+            title: Megjelenítendő név
+          email:
+            title: => core.ref.email
+            visibility_hide: Email cím elrejtése
+            visibility_show: Email cím megjelenítése
+          group_badges:
+            no_badges: Nincs
+            title: Csoportok
+          join_time:
+            title: Csatlakozott
+          user_actions:
+            title: Műveletek
+            edit_user:
+              button: => core.ref.edit
+              tooltip: "{username} szerkesztése"
+          user_id:
+            title: ID
+          username:
+            profile_link_tooltip: "{username} profiljának megtekintése"
+            title: => core.ref.username
+        invalid_column_content: Érvénytelen
+      search_placeholder: => core.ref.search_users
+      title: => core.ref.users
+      total_users: "Összes felhasználó: {count}"
   forum:
-
-    # These translations are used in the Change Email modal dialog.
     change_email:
       confirm_password_placeholder: => core.ref.confirm_password
       confirmation_message: => core.ref.confirmation_email_sent
       dismiss_button: => core.ref.okay
-      incorrect_password_message: A megadott jelszó hibás.
+      incorrect_password_message: A megadott jelszó helytelen.
       submit_button: => core.ref.save_changes
       title: => core.ref.change_email
-
-    # These translations are used in the Change Password modal dialog.
     change_password:
-      send_button: "Jelszó-visszaállító email újraküldése"
-      text: Kattints a lenti gombra a jelszócseréhez szükséges email elküldéséhez.
+      send_button: Jelszó visszaállító email küldése
+      text: Kattints az alábbi gombra és ellenőrizd az emailjeidet a jelszó megváltoztatásához szükséges linkért.
       title: => core.ref.change_password
-
-    # These translations are used by the composer controls.
     composer:
       close_tooltip: Bezárás
-      exit_full_screen_tooltip: Kilépés a teljes képernyős módból
+      exit_full_screen_tooltip: Kilépés teljes képernyőből
       full_screen_tooltip: Teljes képernyő
       minimize_tooltip: Minimalizálás
       preview_tooltip: Előnézet
-
-    # These translations are used by the composer when starting a discussion.
     composer_discussion:
-      body_placeholder: Téma leírása...
-      discard_confirmation: "Nem hoztad létre a témádat. El szeretnéd vetni az eddig megírtakat?"
-      submit_button: Téma elküldése
+      body_placeholder: Írj egy hozzászólást...
+      discard_confirmation: Nem küldted el a beszélgetésedet. El szeretnéd vetni?
+      submit_button: Beszélgetés elküldése
       title: => core.ref.start_a_discussion
-      title_placeholder: Téma címe
-
-    # These translations are used by the composer when editing a post.
+      title_placeholder: Beszélgetés címe
     composer_edit:
-      discard_confirmation: "Nem mentetted el a változtatásaidat. El szeretnéd vetni a változtatásaidat?"
-      post_link: "#{number} poszt itt: {discussion}"
+      discard_confirmation: Nem mentetted a változtatásaidat. El szeretnéd vetni őket?
+      edited_message: A szerkesztésed megtörtént.
+      post_link: "{number}. hozzászólás a(z) {discussion} beszélgetésben"
       submit_button: => core.ref.save_changes
-
-    # These translations are used by the composer when replying to a discussion.
+      view_button: => core.ref.view
     composer_reply:
       body_placeholder: => core.ref.write_a_reply
-      discard_confirmation: "Nem küldted el a válaszodat. El szeretnéd vetni az eddig megírtakat?"
-      posted_message: Hozzászólás elküldve.
-      submit_button: Válasz elküldése
-      view_button: Megtekintés
-
-    # These translations are used by the discussion control buttons.
+      discard_confirmation: Nem küldted el a válaszodat. El szeretnéd vetni?
+      posted_message: A válaszod elküldve.
+      submit_button: Válasz küldése
+      view_button: => core.ref.view
     discussion_controls:
       cannot_reply_button: Nem válaszolhatsz
-      cannot_reply_text: Nincs jogod válaszolni ebben a témában.
+      cannot_reply_text: Nincs jogosultságod válaszolni ebben a beszélgetésben.
       delete_button: => core.ref.delete
-      delete_confirmation: "Biztosan törölni szeretnéd ezt a témát?"
+      delete_confirmation: Biztosan törölni szeretnéd ezt a beszélgetést?
       delete_forever_button: => core.ref.delete_forever
-      log_in_to_reply_button: "Jelentkezz be, ha válaszolni szeretnél!"
+      log_in_to_reply_button: Jelentkezz be a válaszoláshoz
       rename_button: => core.ref.rename
       reply_button: => core.ref.reply
       restore_button: => core.ref.restore
-
-    # These translations are used in the discussion list.
+      toggle_dropdown_accessible_label: Beszélgetés műveletek legördülő menü váltása
     discussion_list:
-      empty_text: Úgy tűnik, hogy itt (még) nincs semmi.
+      empty_text: Úgy tűnik, nincsenek itt beszélgetések.
       load_more_button: => core.ref.load_more
-      mark_as_read_tooltip: Olvasottnak jelölöm
       replied_text: "{username} válaszolt {ago}"
-      started_text: "{username} indította {ago}"
-
-    # These translations are used in the Edit User modal dialog (admin function).
+      skip_discussion_list_pane: Beszélgetéslista panel átugrása
+      started_text: "{username} kezdte {ago}"
+      total_replies_a11y_label: "{count, plural, one {# válasz} other {# válasz}}"
+      unread_replies_a11y_label: "{count, plural, one {# olvasatlan válasz} other {# olvasatlan válasz}}. Olvasatlan {count, plural, one {válasz} other {válaszok}} megjelölése olvasottként."
+    forgot_password:
+      dismiss_button: => core.ref.okay
+      email_placeholder: => core.ref.email
+      email_sent_message: Ha a megadott email cím regisztrálva van ezen az oldalon, küldünk egy emailt a jelszó visszaállításához szükséges linkkel. Ellenőrizd a spam mappádat, ha nem kapod meg pár percen belül.
+      not_found_message: Nincs felhasználó regisztrálva ezzel az email címmel.
+      submit_button: Jelszó helyreállítása
+      text: Add meg az email címedet és küldünk egy linket a jelszavad visszaállításához.
+      title: Elfelejtett jelszó
+    header:
+      admin_button: Adminisztráció
+      back_to_index_tooltip: Vissza a beszélgetéslistához
+      locale_dropdown_accessible_label: Fórum nyelv váltása
+      log_in_link: => core.ref.log_in
+      log_out_button: => core.ref.log_out
+      profile_button: Profil
+      search_placeholder: Fórum keresése
+      search_role_label: Fórum keresése
+      session_dropdown_accessible_label: Munkamenet opciók legördülő menü váltása
+      settings_button: => core.ref.settings
+      sign_up_link: => core.ref.sign_up
+    index:
+      all_discussions_link: => core.ref.all_discussions
+      cannot_start_discussion_button: Nem indíthatsz beszélgetést
+      mark_all_as_read_confirmation: Biztosan megjelölöd az összes beszélgetést olvasottként?
+      mark_all_as_read_tooltip: => core.ref.mark_all_as_read
+      meta_title_text: => core.ref.all_discussions
+      refresh_tooltip: => core.ref.refresh
+      start_discussion_button: => core.ref.start_a_discussion
+      skip_to_main_content: Ugrás a fő tartalomhoz
+      toggle_sidenav_dropdown_accessible_label: Navigációs legördülő menü váltása
+    index_sort:
+      latest_button: Legújabb
+      newest_button: => core.ref.newest
+      oldest_button: => core.ref.oldest
+      relevance_button: => core.ref.relevance
+      toggle_dropdown_accessible_label: Beszélgetéslista rendezés változtatása
+      top_button: Top
+    log_in:
+      forgot_password_link: Elfelejtett jelszó?
+      invalid_login_message: => core.ref.invalid_login_message
+      password_placeholder: => core.ref.password
+      remember_me_label: => core.ref.remember_me_label
+      sign_up_text: Nincs még fiókod? <a>Regisztrálj</a>
+      submit_button: => core.ref.log_in
+      title: => core.ref.log_in
+      username_or_email_placeholder: => core.ref.username_or_email_placeholder
+    notifications:
+      delete_all_confirm: Biztosan törölni szeretnéd az összes értesítést? Ez a művelet nem visszavonható
+      delete_all_tooltip: Összes értesítés törlése
+      discussion_renamed_text: "{username} megváltoztatta a címet"
+      empty_text: Nincsenek értesítések
+      mark_all_as_read_tooltip: => core.ref.mark_all_as_read
+      mark_as_read_tooltip: Megjelölés olvasottként
+      title: => core.ref.notifications
+      toggle_dropdown_accessible_label: Értesítések megtekintése
+      tooltip: => core.ref.notifications
+    post:
+      edited_text: Szerkesztve
+      edited_tooltip: "{username} szerkesztette {ago}"
+      number_tooltip: "{number}. hozzászólás"
+    post_controls:
+      delete_button: => core.ref.delete
+      delete_confirmation: Biztosan véglegesen törölni szeretnéd ezt a hozzászólást? Ez a művelet nem visszavonható.
+      delete_forever_button: => core.ref.delete_forever
+      edit_button: => core.ref.edit
+      hide_confirmation: Biztosan törölni szeretnéd ezt a hozzászólást?
+      restore_button: => core.ref.restore
+      toggle_dropdown_accessible_label: Hozzászólás vezérlők legördülő menü váltása
+    post_list:
+      empty_text: Úgy tűnik, nincsenek itt hozzászólások.
+      in_discussion_text: "A(z) {discussion} beszélgetésben"
+      load_more_button: => core.ref.load_more
+    post_scrubber:
+      now_link: Most
+      original_post_link: Eredeti hozzászólás
+      unread_text: "{count} olvasatlan"
+      viewing_text: "{count, plural, one {{index}. a {formattedCount} hozzászólásból} other {{index}. a {formattedCount} hozzászólásból}}"
+    post_stream:
+      discussion_renamed_old_tooltip: "A régi cím ez volt: {old}"
+      discussion_renamed_text: "{username} megváltoztatta a címet erre: {new} {time}."
+      load_more_button: => core.ref.load_more
+      reply_placeholder: => core.ref.write_a_reply
+      time_lapsed_text: "{period} később"
+    posts_sort:
+      newest_button: => core.ref.newest
+      oldest_button: => core.ref.oldest
+      relevance_button: => core.ref.relevance
+    posts:
+      meta_title_text: Hozzászólás keresési eredmények
+      refresh_tooltip: => core.ref.refresh
+    rename_discussion:
+      submit_button: => core.ref.rename
+      title: Beszélgetés átnevezése
+    security:
+      browser_on_operating_system: "{browser} {os} rendszeren"
+      cannot_terminate_current_session: Nem lehet megszakítani az aktuális aktív munkamenetet. Jelentkezz ki helyette.
+      created: Létrehozva
+      current_active_session: Jelenlegi aktív munkamenet
+      developer_tokens_heading: Fejlesztői tokenek
+      empty_text: Úgy tűnik, itt nincs semmi látnivaló.
+      global_logout:
+        heading: Globális kijelentkezés
+        help_text: Törli a jelenlegi cookie munkamenetet, megszakítja az összes munkamenetet, visszavonja a fejlesztői tokeneket és érvényteleníti az email megerősítő vagy jelszó visszaállító emaileket.
+        log_out_button: => core.ref.log_out
+      hide_access_token: Token elrejtése
+      last_activity: Utolsó aktivitás
+      never: => core.ref.never
+      new_access_token_button: => core.ref.new_token
+      new_access_token_modal:
+        submit_button: Token létrehozása
+        title: => core.ref.new_token
+        title_placeholder: Cím
+      revoke_access_token: Visszavonás
+      revoke_access_token_confirmation: => core.ref.generic_confirmation_message
+      sessions_heading: Aktív munkamenetek
+      session_terminated: "{count, plural, one {Munkamenet megszakítva} other {# munkamenet megszakítva}}."
+      session_termination_failed: Hiba történt a munkamenetek megszakítása közben.
+      show_access_token: Token megtekintése
+      terminate_all_other_sessions: Összes többi munkamenet megszakítása
+      terminate_all_other_sessions_confirmation: => core.ref.generic_confirmation_message
+      terminate_session: Megszakítás
+      title: => core.ref.security
+      token_revoked: Token visszavonva.
+      token_item_title: "{title} - {token}"
+      token_title_placeholder: /
+    settings:
+      account_heading: Fiók
+      change_email_button: => core.ref.change_email
+      change_password_button: => core.ref.change_password
+      color_scheme_heading: Színséma
+      color_schemes:
+        auto_mode_label: Rendszer preferencia
+        dark_hc_mode_label: => core.ref.dark_hc_mode_label
+        dark_mode_label: => core.ref.dark_mode_label
+        light_hc_mode_label: => core.ref.light_hc_mode_label
+        light_mode_label: => core.ref.light_mode_label
+      notification_checkbox_a11y_label_template: "{description} értesítések fogadása {method} módszerrel"
+      notifications_heading: => core.ref.notifications
+      notify_by_email_heading: => core.ref.email
+      notify_by_web_heading: Web
+      notify_discussion_renamed_label: Valaki átnevezi az általam indított beszélgetést
+      privacy_disclose_online_label: Mások láthatják, amikor online vagyok
+      privacy_heading: Adatvédelem
+      title: => core.ref.settings
+    sign_up:
+      dismiss_button: => core.ref.okay
+      email_placeholder: => core.ref.email
+      log_in_text: Már van fiókod? <a>Jelentkezz be</a>
+      password_placeholder: => core.ref.password
+      submit_button: => core.ref.sign_up
+      title: => core.ref.sign_up
+      username_placeholder: => core.ref.username
+      welcome_text: "Üdvözlünk, {username}!"
+    user:
+      avatar_remove_button: => core.ref.remove
+      avatar_upload_button: Feltöltés
+      avatar_upload_tooltip: Új avatar feltöltése
+      discussions_link: => core.ref.discussions
+      in_discussion_text: "A(z) {discussion} beszélgetésben"
+      joined_date_text: "Csatlakozott {ago}"
+      online_text: Online
+      posts_empty_text: Úgy tűnik, nincsenek itt hozzászólások.
+      posts_link: => core.ref.posts
+      posts_load_more_button: => core.ref.load_more
+      security_link: => core.ref.security
+      settings_link: => core.ref.settings
+    user_controls:
+      button: Vezérlők
+      delete_button: => core.ref.delete
+      delete_confirmation: Biztosan törölni szeretnéd ezt a felhasználót? A felhasználó hozzászólásai NEM lesznek törölve.
+      delete_error_message: "<i>{username} ({email})</i> felhasználó törlése sikertelen"
+      delete_success_message: "<i>{username} ({email})</i> felhasználó törölve"
+      edit_button: => core.ref.edit
+      toggle_dropdown_accessible_label: Felhasználó vezérlők legördülő menü váltása
+    user_email_confirmation:
+      alert_message: => core.ref.confirmation_email_sent
+      resend_button: Megerősítő email újraküldése
+      sent_message: Elküldve
+    welcome_hero:
+      hide: Üdvözlő üzenet elrejtése
+  lib:
+    debug_button: Debug
+    alert:
+      dismiss_a11y_label: Figyelmeztetés elvetése
+    badge:
+      hidden_tooltip: Rejtett
+    dropdown:
+      toggle_dropdown_accessible_label: Legördülő menü váltása
+    data_segment:
+      label: "{label}:"
     edit_user:
       activate_button: Felhasználó aktiválása
       email_heading: => core.ref.email
@@ -265,340 +1045,910 @@ core:
       groups_heading: Csoportok
       password_heading: => core.ref.password
       password_label: => core.ref.password
-      set_password_label: Set new password
+      set_password_label: Új jelszó beállítása
       submit_button: => core.ref.save_changes
-      title: Felhasználó szerkesztése
+      title: => core.ref.edit_user
       username_heading: => core.ref.username
       username_label: => core.ref.username
-
-    # These translations are used in the Forgot Password modal dialog.
-    forgot_password:
-      dismiss_button: => core.ref.okay
-      email_placeholder: => core.ref.email
-      email_sent_message:  Elküldtünk egy emailt amellyel visszaállíthatod a jelszavadat. (Ha nem érkezik meg pár percen belül az email, akkor nézd meg a spam mappát is.)
-      not_found_message: Nincs felhasználónk ilyen email-címmel.
-      submit_button: Jelszó visszaszerzése
-      text:  "Add meg az email-címedet és mi el fogjuk küldeni Neked a jelszó-visszaállításhoz szükséges emailt."
-      title: Elfelejtettem a jelszavam
-
-    # These translations are used in the header and session dropdown menu.
-    header:
-      admin_button: Adminisztráció
-      back_to_index_tooltip: Vissza a témákhoz
-      log_in_link: => core.ref.log_in
-      log_out_button: => core.ref.log_out
-      profile_button: Profil
-      search_placeholder: Keresés
-      settings_button: => core.ref.settings
-      sign_up_link: => core.ref.sign_up
-
-    # These translations are used on the index page, peripheral to the discussion list.
-    index:
-      all_discussions_link: => core.ref.all_discussions
-      cannot_start_discussion_button: Nem indíthatsz új témát
-      mark_all_as_read_confirmation: "Biztosan olvasottnak szeretnéd jelölni az összes témát?"
-      mark_all_as_read_tooltip: => core.ref.mark_all_as_read
-      refresh_tooltip: Frissítés
-      start_discussion_button: => core.ref.start_a_discussion
-
-    # These translations are used by the sorting control above the discussion list.
-    index_sort:
-      latest_button: Legutóbbi
-      newest_button: Legújabb
-      oldest_button: Legrégebbi
-      relevance_button: Relevancia
-      top_button: Top
-
-    # These translations are used in the Log In modal dialog.
-    log_in:
-      forgot_password_link: "Elfelejtetted a jelszavadat?"
-      invalid_login_message: A belépési adataid hibások voltak.
-      password_placeholder: => core.ref.password
-      remember_me_label: Emlékezz rám
-      sign_up_text: "Nincs még felhasználód? <a>Regisztrálj!</a>"
-      submit_button: => core.ref.log_in
-      title: => core.ref.log_in
-      username_or_email_placeholder: Felhasználónév vagy Email
-
-    # These translations are used by the Notifications dropdown, a.k.a. "the bell".
-    notifications:
-      discussion_renamed_text: "{username} módosította a címet."
-      empty_text: Nincs új értesítés.
-      mark_all_as_read_tooltip: => core.ref.mark_all_as_read
-      mark_as_read_tooltip: Megjelölés olvasottként
-      title: => core.ref.notifications
-      tooltip: => core.ref.notifications
-
-    # These translations are used by tooltips displayed for individual posts.
-    post:
-      edited_text: Módosítva
-      edited_tooltip: "{username} módosította {ago}"
-      number_tooltip: "Poszt #{number}"
-
-    # These translations are used by the post control buttons.
-    post_controls:
-      delete_button: => core.ref.delete
-      delete_forever_button: => core.ref.delete_forever
-      edit_button: => core.ref.edit
-      restore_button: => core.ref.restore
-
-    # These translations are used in the scrubber to the right of the post stream.
-    post_scrubber:
-      now_link: Most
-      original_post_link: Eredeti poszt
-      unread_text: "{count} olvasatlan"
-      viewing_text: "{index} a {count} posztból|{index} a {count} posztból"
-
-    # These translations are displayed between posts in the post stream.
-    post_stream:
-      discussion_renamed_old_tooltip: 'A régi cím: "{old}"'
-      discussion_renamed_text: "{username} módosította a címet a következőre: {new}."
-      load_more_button: => core.ref.load_more
-      reply_placeholder: => core.ref.write_a_reply
-      time_lapsed_text: "{period} később"
-
-    # These translations are used by the rename discussion modal.
-    rename_discussion:
-      submit_button: => core.ref.rename
-      title: Téma átnevezése
-
-    # These translations are used by the search results dropdown list.
-    search:
-      all_discussions_button: 'Keresés az összes témában: "{query}"'
-      discussions_heading: => core.ref.discussions
-      users_heading: => core.ref.users
-
-    # These translations are used in the Settings page.
-    settings:
-      account_heading: Felhasználó
-      change_email_button: => core.ref.change_email
-      change_password_button: => core.ref.change_password
-      notifications_heading: => core.ref.notifications
-      notify_by_email_heading: => core.ref.email
-      notify_by_web_heading: Web
-      notify_discussion_renamed_label: Valaki átnevezte a nyitott témámat
-      privacy_disclose_online_label: "Láthatóság engedélyezése (lássák a többiek, ha online vagyok)"
-      privacy_heading: Privát
-      title: => core.ref.settings
-
-    # These translations are used in the Sign Up modal dialog.
-    sign_up:
-      dismiss_button: => core.ref.okay
-      email_placeholder: => core.ref.email
-      log_in_text: "Már regisztráltál? <a>Jelentkezz be!</a>"
-      password_placeholder: => core.ref.password
-      submit_button: => core.ref.sign_up
-      title: => core.ref.sign_up
-      username_placeholder: => core.ref.username
-      welcome_text: "Üdvözlünk, {username}!"
-
-    # These translations are used in the user profile page and profile popup.
-    user:
-      avatar_remove_button: => core.ref.remove
-      avatar_upload_button: Feltöltés
-      avatar_upload_tooltip: Új avatar feltöltése
-      discussions_link: => core.ref.discussions
-      in_discussion_text: "Itt: {discussion}"
-      joined_date_text: "Csatlakozott: {ago}"
-      online_text: Online
-      posts_empty_text: "Úgy tűnik, hogy itt nincs egy poszt sem."
-      posts_link: => core.ref.posts
-      posts_load_more_button: => core.ref.load_more
-      settings_link: => core.ref.settings
-
-    # These translations are found on the user profile page (admin function).
-    user_controls:
-      button: Vezérlőpult
-      delete_button: => core.ref.delete
-      delete_confirmation: "Biztosan törölni szeretnéd ezt a felhasználói fiókot? A felhasználó hozzászólásai NEM fognak törlődni."
-      delete_error_message: "<i>{username} ({email})</i> felhasználó törlése sikertelen volt"
-      delete_success_message: "<i>{username} ({email})</i> felhasználó törölve"
-      edit_button: => core.ref.edit
-
-    # These translations are used in the alert that is shown when a new user has not confirmed their email address.
-    user_email_confirmation:
-      alert_message: => core.ref.confirmation_email_sent
-      resend_button: "Megerősítő e-mail újraküldése"
-      sent_message: Elküldve
-
-  # Translations in this namespace are used by the forum and admin interfaces.
-  lib:
-
-    # These translations are displayed as tooltips for discussion badges.
-    badge:
-      hidden_tooltip: Rejtett
-
-    # These translations are displayed as error messages.
+      nothing_available: Nem szerkesztheted ezt a felhasználót.
     error:
-      generic_message: "Hoppá! Valami hiba történt. Kérlek, frissítsd az oldalt."
+      circular_dependencies_message: "Körkörös függőségek észlelve: {extensions}. Megszakítás. Kérlek kapcsolj ki egy bővítményt és próbáld újra."
+      db_error_message: Adatbázis lekérdezés sikertelen. Ez lehet egy bővítmény és az adatbázis meghajtód közötti inkompatibilitás miatt.
+      dependent_extensions_message: "Nem lehet letiltani a(z) {extension} bővítményt, amíg a következő függő bővítmények le nem lettek tiltva: {extensions}"
+      extension_initialiation_failed_message: "{extension} inicializálása sikertelen, ellenőrizd a böngésző konzolt további információért."
+      extension_runtime_failed_message: "{extension} hibába ütközött futás közben. Ellenőrizd a böngésző konzolt további információért."
+      generic_message: Hoppá! Valami hiba történt. Kérlek töltsd újra az oldalt és próbáld újra.
+      generic_cross_origin_message: Hoppá! Valami hiba történt egy kereszt-eredetű kérés során. Kérlek töltsd újra az oldalt és próbáld újra.
+      missing_dependencies_message: "Nem lehet engedélyezni a(z) {extension} bővítményt, amíg a következő függőségek nem lettek engedélyezve: {extensions}"
       not_found_message: A kért erőforrás nem található.
-      permission_denied_message: Nem rendelkezel megfelelő jogokkal ehhez.
-      rate_limit_exceeded_message: Hűű, picit túl gyors vagy! Próbáld meg picit később.
-
-    # These translations are used as suffixes when abbreviating numbers.
+      payload_too_large_message: A kérés tartalma túl nagy volt.
+      permission_denied_message: Nincs jogosultságod ezt megtenni.
+      rate_limit_exceeded_message: Egy kicsit túl gyorsan haladsz. Kérlek próbáld újra néhány másodperc múlva.
+      render_failed_message: Sajnáljuk, hibába ütköztünk a tartalom megjelenítése közben. Ha felhasználó vagy, kérlek próbáld később. Ha adminisztrátor vagy, nézz bele a Flarum log fájlokba további információért.
+    gambits:
+      group_keys:
+        allows: engedélyez
+        has: rendelkezik
+        is: az
+      discussions:
+        author:
+          key: szerző
+          hint: felhasználónév vagy vesszővel elválasztott felhasználónevek listája
+        created:
+          key: létrehozva
+          hint: 2020-12-31 vagy 2020-12-31..2021-09-30
+        hidden:
+          key: rejtett
+        unread:
+          key: olvasatlan
+      posts:
+        discussion:
+          key: beszélgetés
+          hint: a beszélgetés ID-ja
+      users:
+        email:
+          key: email
+          hint: példa@gép.local
+        group:
+          key: csoport
+          hint: egyes vagy többes számú csoportnevek
+    input:
+      clear_button: Bevitel törlése
+    loading_indicator:
+      accessible_label: => core.ref.loading
+    meta_titles:
+      with_page_title: "{pageNumber, plural, =1 {{pageTitle} - {forumName}} other {{pageTitle}: {pageNumber}. oldal - {forumName}}}"
+      without_page_title: "{pageNumber, plural, =1 {{forumName}} other {{pageNumber}. oldal - {forumName}}}"
+    modal:
+      close: Bezárás
+    multi_select:
+      placeholder: Válassz több opciót
+    nav:
+      drawer_button: Navigációs fiók megnyitása
+    notices:
+      bisecting: Bővítmény bisect folyamat fut a problémát okozó bővítmény megtalálásához.
+      bisecting_continue: Bisect folytatása
+      maintenance_mode_low: Karbantartás miatt nem elérhető. Csak az adminisztrátorok férhetnek hozzá a fórumhoz.
+      maintenance_mode_safe: Karbantartás miatt nem elérhető biztonságos módban. Csak az adminisztrátorok férhetnek hozzá a fórumhoz és egyetlen bővítmény sem töltődik be.
     number_suffix:
-      kilo_text: K
+      kilo_text: E
       mega_text: M
-
-    # These translations are used to punctuate a series of items.
+    pagination:
+      back_button: Előző oldal
+      first_button: Ugrás az első oldalra
+      go_to_page_textbox_a11y_label: Ugrás közvetlenül az oldalszámra
+      last_button: Ugrás az utolsó oldalra
+      next_button: Következő oldal
+      page_counter: "{current}. oldal a {total}-ból/ből"
+    search:
+      gambit_plus_button_a11y_label: Pozitív szűrő hozzáadása
+      gambit_minus_button_a11y_label: Negatív szűrő hozzáadása
+      title: Keresés
+      no_results_text: Úgy tűnik, itt nincsenek eredmények.
+      no_search_text: Még nem kerestél semmit.
+      options_heading: Keresési opciók
+      placeholder: Keresés...
+      preview_heading: Keresés előnézet
+      search_clear_button_accessible_label: Keresési lekérdezés törlése
+    search_source:
+      discussions:
+        all_button: "Keresés minden beszélgetésben: {query}"
+        heading: => core.ref.discussions
+      posts:
+        all_button: "Keresés minden hozzászólásban: {query}"
+        heading: => core.ref.posts
+      users:
+        heading: => core.ref.users
     series:
       glue_text: ", "
       three_text: "{first}, {second} és {third}"
       two_text: "{first} és {second}"
-
-    # These translations are used to modify usernames.
+    user_selection_modal:
+      empty_results: Nem találhatók felhasználók a keresésed alapján.
+      max_items_to_select: "{count, plural, one {Válassz ki legfeljebb # felhasználót} other {Válassz ki legfeljebb # felhasználót}}"
+      search_placeholder: => core.ref.search_users
+      submit_button: => core.ref.okay
+      title: Válaszd ki a releváns felhasználókat
     username:
-      deleted_text: "[törölve]"
-
-  # Translations in this namespace are used in views other than Flarum's normal JS client.
+      deleted_text: [törölve]
+    datetime_formats:
+      fullTime: YYYY. MMMM D., HH:mm
+      humanTimeShort: MMM D.
+      humanTimeLong: YYYY. MMM D.
+      scrubber: YYYY. MMMM
+      userListJoinDate: YYYY. MMM D., HH:mm
   views:
-
-    # Translations in this namespace are displayed by the basic HTML content loader.
+    admin:
+      extensions:
+        caption: => core.ref.extensions
+        disable: Letiltás
+        empty: Nincsenek telepített bővítmények
+        enable: Engedélyezés
+        name: Bővítmény neve
+        package_name: Csomag neve
+        version: Verzió
+      info:
+        caption: Alkalmazás információ
+      title: Adminisztráció
+    confirm_email:
+      submit_button: => core.ref.confirm_email
+      text: Kattints az alábbi gombra a fiókod email címének megerősítéséhez.
+      title: => core.ref.confirm_email
     content:
-      javascript_disabled_message: A legjobb élményhez egy modern böngésző szükséges engedélyezett JavaScript-tel..
-      load_error_message: Valami félresikerült az oldal betöltése közben.
-      loading_text: Betöltés...
-
-    # Translations in this namespace are displayed in the basic HTML discussion view.
+      javascript_disabled_message: Ez az oldal modern böngészőben, engedélyezett JavaScript-tel tekinthető meg a legjobban.
+      load_error_message: Valami hiba történt az oldal teljes verziójának betöltése közben. Próbáld meg újratölteni az oldalt a hiba javításához.
+      loading_text: => core.ref.loading
     discussion:
       next_page_button: => core.ref.next_page
       previous_page_button: => core.ref.previous_page
-
-    # Translations in this namespace are displayed when Flarum encounters an error.
     error:
       csrf_token_mismatch: Túl sokáig voltál inaktív.
-      csrf_token_mismatch_return_link: Vissza, hogy megpróbáljam mégegyszer
-      invalid_confirmation_token: Ez a megerősítő link már fel lett használva vagy érvénytelen.
-      not_authenticated: Nem rendelkezel megfelelő jogokkal az oldal megtekintéséhez. Próbáld meg újra bejelentkezés után.
-      not_found: A keresett oldal nem található.
-      not_found_return_link: "Visszatérés a {forum} oldalra."
-      permission_denied: Nem rendelkezel megfelelő jogokkal az oldal megtekintéséhez.
-      unknown: Egy hiba lépett fel az oldal betöltése közben.
-
-    # Translations in this namespace are displayed by the basic HTML discussion index.
+      csrf_token_mismatch_return_link: Menj vissza és próbáld újra
+      invalid_confirmation_token: Ez a megerősítő link már használva lett vagy érvénytelen.
+      maintenance_mode_link: Adminisztrátor bejelentkezés
+      maintenance_mode_message: Ez a fórum jelenleg karbantartás alatt áll. Kérlek nézz vissza később.
+      maintenance_mode_title: Karbantartás
+      not_authenticated: Nincs jogosultságod megtekinteni ezt az oldalt. Próbáld újra bejelentkezés után.
+      not_found: A kért oldal nem található.
+      not_found_return_link: "Vissza a(z) {forum} fórumhoz"
+      permission_denied: Nincs jogosultságod megtekinteni ezt az oldalt.
+      unknown: Hiba történt az oldal betöltése közben.
     index:
       all_discussions_heading: => core.ref.all_discussions
       next_page_button: => core.ref.next_page
       previous_page_button: => core.ref.previous_page
-
-    # Translations in this namespace are displayed by the Log Out confirmation interface.
+    layout:
+      skip_to_content: Ugrás a tartalomhoz
     log_out:
       log_out_button: => core.ref.log_out
-      log_out_confirmation: "Biztosan ki szeretnél jelentkezni?"
+      log_out_confirmation: "Biztosan ki szeretnél jelentkezni a(z) {forum} fórumból?"
       title: => core.ref.log_out
-
-    # Translations in this namespace are displayed by the Reset Password interface.
+    log_in:
+      invalid_login_message: => core.ref.invalid_login_message
+      username_or_email_placeholder: => core.ref.username_or_email_placeholder
+      password_placeholder: => core.ref.password
+      remember_me_label: => core.ref.remember_me_label
+      submit_button: => core.ref.log_in
+      title: => core.ref.log_in
     reset_password:
-      confirm_password_label: => core.ref.confirm_password
-      password_label: => core.ref.password
-      submit_button: Jelszó visszaállítása
+      confirm_password_label: Új jelszó megerősítése
+      new_password_label: Új jelszó
+      submit_button: => core.ref.save_changes
       title: => core.ref.reset_your_password
-
-  # Translations in this namespace are used in messages output by the API.
+    unsubscribe_email:
+      title: Leiratkozás megerősítése
+      return_to_forum: "Vissza a(z) {forumTitle} fórumhoz"
+      confirm_button: Megerősítés
+      immediate_helptext: A megerősítés után azonnal leiratkozol.
+      confirm_message: Leiratkozást kértél a(z) "{type}" email értesítésekről a(z) {forumTitle} fórumból.
+      success_message: Sikeresen leiratkoztál a(z) "{type}" értesítésekről a(z) {forumTitle} fórumból. Ha újra szeretnéd őket kapni, kérlek [frissítsd a beállításaidat]({settingsLink}).
+      invalid_message: "Ez a leiratkozási link érvénytelen vagy már használva lett. Az email értesítéseid változtatásához a(z) {forumTitle} fórumban, kérlek [ellenőrizd a beállításaidat]({settingsLink})."
   api:
-    invalid_username_message: "A felhasználónév csak betűket, számokat és gondolatjelet tartalmazhat."
-
-  # Translations in this namespace are used in emails sent by the forum.
+    invalid_username_message: A felhasználónév csak betűket, számokat és kötőjeleket tartalmazhat. Legalább egy betűvel.
+    invalid_filter_type:
+      must_be_numeric_message: "A(z) {filter} szűrőnek numerikusnak kell lennie."
+      must_not_be_array_message: "A(z) {filter} szűrő nem lehet tömb."
+      must_not_be_multidimensional_array_message: "A(z) {filter} szűrő nem lehet többdimenziós tömb."
   email:
-
-    # These translations are used in emails sent when users register new accounts.
+    greeting: "Szia {displayName},"
+    signoff: "A(z) {forumTitle} csapata"
+    informational:
+      default_title: Információ
+      footer: "Ez az email a(z) {userEmail} címre lett küldve a [{forumTitle}]({forumUrl}) fórumon lévő fiókodhoz kapcsolódó információs szolgáltatásként."
+      footer_plain: "Ez az email a(z) {userEmail} címre lett küldve a(z) {forumTitle} fórumon lévő fiókodhoz kapcsolódó információs szolgáltatásként."
+    notification:
+      default_title: Értesítés
+      footer:
+        main_text: Ez az email a(z) {email} címre lett küldve, mert feliratkoztál a(z) "{type}" értesítésekre a [{forumTitle}]({forumUrl}) fórumon.
+        main_text_plain: Ez az email a(z) {email} címre lett küldve, mert feliratkoztál a(z) "{type}" értesítésekre a(z) {forumTitle} fórumon.
+        unsubscribe_text: "Ha nem szeretnél több ilyen típusú értesítést kapni, [iratkozz le itt]({unsubscribeLink})."
+        unsubscribe_text_plain: "Ha nem szeretnél több ilyen típusú értesítést kapni, iratkozz le itt: {unsubscribeLink}"
+        settings_text: "Kezeld az értesítési beállításaidat [itt]({settingsLink})."
+        settings_text_plain: "Kezeld az értesítési beállításaidat itt: {settingsLink}"
     activate_account:
-      subject: Új felhasználó aktiválása
+      subject: Új fiókod aktiválása
       body: |
-        Helló, {username}!
-
-        Valaki (remélhetőleg Te!) regisztrált a fórumunkra ({forum}) ezzel az email-címmel.
-
-        Ha Te voltál az, akkor csak kattints az alábbi linkre és a felhasználód aktiválva lesz:
+        Valaki (remélhetőleg te!) regisztrált a(z) {forum} fórumon ezzel az email címmel.
+        
+        Ha te voltál, egyszerűen kattints a következő linkre és a fiókod aktiválva lesz:
         {url}
-
-        Ha mégsem Te regisztráltál, abban az esetben hagyd figyelmen kívül ezt a levelet.
-
-    # These translations are used in emails sent when users change their email address.
+        
+        Ha nem te regisztráltál, kérlek hagyd figyelmen kívül ezt az emailt.
+        
     confirm_email:
-      subject: "Új e-mail cím megerősítése"
+      subject: Új email címed megerősítése
       body: |
-        Helló, {username}!
-
-        Valaki (remélhetőleg Te!) megváltoztatta az email-címét a fórumunkon ({forum}) erre a címre.
-
-        Ha Te voltál az, akkor csak kattints az alábbi linkre és az email-címed meg lesz erősítve:
+        Valaki (remélhetőleg te!) megváltoztatta az email címét a(z) {forum} fórumon erre.
+        
+        Ha te voltál, egyszerűen kattints a következő linkre és az emailed megerősítve lesz:
         {url}
-
-        Ha mégsem Te voltál, abban az esetben hagyd figyelmen kívül ezt a levelet.
-
-    # These translations are used in emails sent when users ask to reset their passwords.
+        
+        Ha nem te voltál, kérlek hagyd figyelmen kívül ezt az emailt.
+        
     reset_password:
       subject: => core.ref.reset_your_password
       body: |
-        Helló, {username}!
-
-        Valaki (remélhetőleg Te!) jelszó-visszaállítást kezdeményezett ezzel a felhasználói fiókkal a fórumunkon ({forum}).
-
-        Ha Te voltál az, akkor csak kattints az alábbi linkre és visszaállítjuk a jelszavadat:
+        Valaki (remélhetőleg te!) elfelejtett jelszó kérelmet küldött a fiókodhoz a(z) {forum} fórumon.
+        
+        Ha te voltál, kattints a következő linkre a jelszavad visszaállításához:
         {url}
-
-        Ha mégsem szeretnéd a jelszavadat megváltoztatni, akkor csak ahgyd figyelmen kívül ezt a levelet.n.
-
-  ##
-  # REUSED TRANSLATIONS - These keys should not be used directly in code!
-  ##
-
-  # Translations in this namespace are referenced by two or more unique keys.
+        
+        Ha nem szeretnéd megváltoztatni a jelszavadat, csak hagyd figyelmen kívül ezt az emailt és semmi sem fog történni.
+        
+    send_test:
+      subject: Flarum email teszt
+      body: |
+        Ez egy teszt email annak megerősítésére, hogy a Flarum email konfigurációd megfelelően működik.
+        
+        Ha te voltál, ez az email azt jelenti, hogy a konfigurációd működik!
+        
+        Ha nem te voltál, kérlek hagyd figyelmen kívül ezt az emailt.
+        
   ref:
-    all_discussions: Összes téma
-    change_email: E-mail cseréje
-    change_password: Jelszó cseréje
-    color: Szín                                 # Referenced by flarum-tags.yml
-    confirm_password: Jelkszó megerősítése
-    confirmation_email_sent: "Elküldtük a megerősítő emailt a {email} címre. Ha nem érkezik meg hamarosan, akkor ellenőrizd a spam mappát is."
-    custom_footer_text: "Adj meg HTML-t, amely az oldal alján fog megjelenni."
+    all_discussions: Összes beszélgetés
+    change_email: Email megváltoztatása
+    change_password: Jelszó megváltoztatása
+    color: Szín
+    confirm_password: Jelszó megerősítése
+    confirm_email: Email megerősítése
+    confirmation_email_sent: "Küldtünk egy megerősítő emailt a(z) {email} címre. Ha nem érkezik meg hamarosan, ellenőrizd a spam mappádat."
+    custom_footer_text: Adj hozzá HTML-t az oldal legalján megjelenítéshez.
     custom_footer_title: Egyéni lábléc szerkesztése
-    custom_header_text: "Adj meg HTML-t, amely az oldal tetején (a Flarum saját fejléce felett) fog megjelenni."
+    custom_header_text: Adj hozzá HTML-t az oldal legtetején megjelenítéshez, a Flarum saját fejléce felett.
     custom_header_title: Egyéni fejléc szerkesztése
+    dark_hc_mode_label: Sötét magas kontrasztú mód
+    dark_mode_label: Sötét mód
     delete: Törlés
     delete_forever: Végleges törlés
-    discussions: Témák
+    discussions: Beszélgetések
     edit: Szerkesztés
+    edit_user: Felhasználó szerkesztése
     email: Email
+    extensions: Bővítmények
+    generic_confirmation_message: Biztosan folytatni szeretnéd? Ez a művelet nem visszavonható.
     icon: Ikon
-    icon_text: "Adj meg egy nevet bármely <a>FontAwesome</a> ikon-osztályból a <code>fas fa-</code> prefix <em>hozzáadásával</em>."
+    icon_text: Add meg bármely <a>FontAwesome</a> ikon osztály nevét, <em>beleértve</em> a <code>fas fa-</code> előtagot.
+    invalid_login_message: A bejelentkezési adataid helytelenek voltak.
+    light_hc_mode_label: Világos magas kontrasztú mód
+    light_mode_label: Világos mód
     load_more: Továbbiak betöltése
+    loading: Betöltés...
     log_in: Bejelentkezés
     log_out: Kijelentkezés
     mark_all_as_read: Összes megjelölése olvasottként
+    never: Soha
+    new_token: Új token
+    newest: Legújabb
     next_page: Következő oldal
     notifications: Értesítések
-    okay: OK                                     # Referenced by flarum-tags.yml
+    okay: OK
+    oldest: Legrégebbi
     password: Jelszó
-    posts: Posztok                                 # Referenced by flarum-statistics.yml
+    posts: Hozzászólások
     previous_page: Előző oldal
+    relevance: Relevancia
+    remember_me_label: Emlékezz rám
     remove: Eltávolítás
     rename: Átnevezés
-    reply: Válasz                                    # Referenced by flarum-mentions.yml
-    reset_your_password: Jelszó visszaállítása
+    reply: Válasz
+    refresh: Frissítés
+    reset_your_password: Jelszavad visszaállítása
     restore: Visszaállítás
-    save_changes: Változások mentése                 # Referenced by flarum-suspend.yml, flarum-tags.yml
+    save_changes: Változtatások mentése
+    search_users: Felhasználók keresése
+    security: Biztonság
     settings: Beállítások
     sign_up: Regisztráció
-    some_others: "{count} további|{count} további"   # Referenced by flarum-likes.yml, flarum-mentions.yml
-    start_a_discussion: Új téma indítása
+    some_others: "{count, plural, one {# másik} other {# másik}}"
+    start_a_discussion: Beszélgetés indítása
     username: Felhasználónév
-    users: Felhasználók                                 # Referenced by flarum-statistics.yml
-    write_a_reply: Válasz írása...
-    you: Te                                      # Referenced by flarum-likes.yml, flarum-mentions.yml
-
-  ##
-  # GROUP NAMES - These keys are translated at the back end.
-  ##
-
-  # Translations in this namespace are used to translate default group names.
+    username_or_email_placeholder: Felhasználónév vagy email
+    users: Felhasználók
+    view: Megtekintés
+    write_a_reply: Írj egy választ...
+    you: Te
   group:
-    admin: Adminisztrátor
-    admins: Adminisztrátorok
+    admin: Admin
+    admins: Adminok
     guest: Vendég
     guests: Vendégek
     member: Tag
     members: Tagok
-    mod: Moderátor
-    mods: Moderátorok
+    mod: Mod
+    mods: Modok
+validation:
+  accepted: "A(z) :attribute mezőt el kell fogadni."
+  accepted_if: "A(z) :attribute mezőt el kell fogadni, amikor :other értéke :value."
+  active_url: "A(z) :attribute mezőnek érvényes URL-nek kell lennie."
+  after: "A(z) :attribute mezőnek :date utáni dátumnak kell lennie."
+  after_or_equal: "A(z) :attribute mezőnek :date utáni vagy azzal egyenlő dátumnak kell lennie."
+  alpha: "A(z) :attribute mező csak betűket tartalmazhat."
+  alpha_dash: "A(z) :attribute mező csak betűket, számokat, kötőjeleket és aláhúzásokat tartalmazhat."
+  alpha_num: "A(z) :attribute mező csak betűket és számokat tartalmazhat."
+  array: "A(z) :attribute mezőnek tömbnek kell lennie."
+  ascii: "A(z) :attribute mező csak egybájtos alfanumerikus karaktereket és szimbólumokat tartalmazhat."
+  before: "A(z) :attribute mezőnek :date előtti dátumnak kell lennie."
+  before_or_equal: "A(z) :attribute mezőnek :date előtti vagy azzal egyenlő dátumnak kell lennie."
+  between:
+    array: "A(z) :attribute mezőnek :min és :max közötti számú elemet kell tartalmaznia."
+    file: "A(z) :attribute mezőnek :min és :max kilobájt között kell lennie."
+    numeric: "A(z) :attribute mezőnek :min és :max között kell lennie."
+    string: "A(z) :attribute mezőnek :min és :max karakter között kell lennie."
+  boolean: "A(z) :attribute mezőnek igaznak vagy hamisnak kell lennie."
+  can: "A(z) :attribute mező jogosulatlan értéket tartalmaz."
+  confirmed: "A(z) :attribute mező megerősítése nem egyezik."
+  current_password: A jelszó helytelen.
+  date: "A(z) :attribute mezőnek érvényes dátumnak kell lennie."
+  date_equals: "A(z) :attribute mezőnek :date-tal egyenlő dátumnak kell lennie."
+  date_format: "A(z) :attribute mezőnek meg kell egyeznie a(z) :format formátummal."
+  decimal: "A(z) :attribute mezőnek :decimal tizedesjegyet kell tartalmaznia."
+  declined: "A(z) :attribute mezőt el kell utasítani."
+  declined_if: "A(z) :attribute mezőt el kell utasítani, amikor :other értéke :value."
+  different: "A(z) :attribute mezőnek és a(z) :other mezőnek különbözőnek kell lennie."
+  digits: "A(z) :attribute mezőnek :digits számjegyűnek kell lennie."
+  digits_between: "A(z) :attribute mezőnek :min és :max számjegy között kell lennie."
+  dimensions: "A(z) :attribute mező érvénytelen képméretekkel rendelkezik."
+  distinct: "A(z) :attribute mezőnek duplikált értéke van."
+  doesnt_end_with: "A(z) :attribute mező nem végződhet a következők egyikével sem: :values."
+  doesnt_start_with: "A(z) :attribute mező nem kezdődhet a következők egyikével sem: :values."
+  email: "A(z) :attribute mezőnek érvényes email címnek kell lennie."
+  ends_with: "A(z) :attribute mezőnek a következők egyikével kell végződnie: :values."
+  enum: "A kiválasztott :attribute érvénytelen."
+  exists: "A kiválasztott :attribute érvénytelen."
+  extensions: "A(z) :attribute mezőnek a következő kiterjesztések egyikével kell rendelkeznie: :values."
+  file: "A(z) :attribute mezőnek fájlnak kell lennie."
+  filled: "A(z) :attribute mezőnek értékkel kell rendelkeznie."
+  gt:
+    array: "A(z) :attribute mezőnek több mint :value elemet kell tartalmaznia."
+    file: "A(z) :attribute mezőnek nagyobbnak kell lennie mint :value kilobájt."
+    numeric: "A(z) :attribute mezőnek nagyobbnak kell lennie mint :value."
+    string: "A(z) :attribute mezőnek több mint :value karakterből kell állnia."
+  gte:
+    array: "A(z) :attribute mezőnek :value vagy több elemet kell tartalmaznia."
+    file: "A(z) :attribute mezőnek legalább :value kilobájtnak kell lennie."
+    numeric: "A(z) :attribute mezőnek legalább :value értékűnek kell lennie."
+    string: "A(z) :attribute mezőnek legalább :value karakterből kell állnia."
+  hex_color: "A(z) :attribute mezőnek érvényes hexadecimális színnek kell lennie."
+  image: "A(z) :attribute mezőnek képnek kell lennie."
+  in: "A kiválasztott :attribute érvénytelen."
+  in_array: "A(z) :attribute mezőnek léteznie kell a(z) :other mezőben."
+  integer: "A(z) :attribute mezőnek egész számnak kell lennie."
+  ip: "A(z) :attribute mezőnek érvényes IP címnek kell lennie."
+  ipv4: "A(z) :attribute mezőnek érvényes IPv4 címnek kell lennie."
+  ipv6: "A(z) :attribute mezőnek érvényes IPv6 címnek kell lennie."
+  json: "A(z) :attribute mezőnek érvényes JSON karakterláncnak kell lennie."
+  lowercase: "A(z) :attribute mezőnek kisbetűsnek kell lennie."
+  lt:
+    array: "A(z) :attribute mezőnek kevesebb mint :value elemet kell tartalmaznia."
+    file: "A(z) :attribute mezőnek kisebbnek kell lennie mint :value kilobájt."
+    numeric: "A(z) :attribute mezőnek kisebbnek kell lennie mint :value."
+    string: "A(z) :attribute mezőnek kevesebb mint :value karakterből kell állnia."
+  lte:
+    array: "A(z) :attribute mező nem tartalmazhat több mint :value elemet."
+    file: "A(z) :attribute mező nem lehet nagyobb mint :value kilobájt."
+    numeric: "A(z) :attribute mező nem lehet nagyobb mint :value."
+    string: "A(z) :attribute mező nem lehet hosszabb mint :value karakter."
+  mac_address: "A(z) :attribute mezőnek érvényes MAC címnek kell lennie."
+  max:
+    array: "A(z) :attribute mező nem tartalmazhat több mint :max elemet."
+    file: "A(z) :attribute mező nem lehet nagyobb mint :max kilobájt."
+    numeric: "A(z) :attribute mező nem lehet nagyobb mint :max."
+    string: "A(z) :attribute mező nem lehet hosszabb mint :max karakter."
+  max_digits: "A(z) :attribute mező nem tartalmazhat több mint :max számjegyet."
+  mimes: "A(z) :attribute mezőnek a következő típusú fájlnak kell lennie: :values."
+  mimetypes: "A(z) :attribute mezőnek a következő típusú fájlnak kell lennie: :values."
+  min:
+    array: "A(z) :attribute mezőnek legalább :min elemet kell tartalmaznia."
+    file: "A(z) :attribute mezőnek legalább :min kilobájtnak kell lennie."
+    numeric: "A(z) :attribute mezőnek legalább :min értékűnek kell lennie."
+    string: "A(z) :attribute mezőnek legalább :min karakterből kell állnia."
+  min_digits: "A(z) :attribute mezőnek legalább :min számjegyet kell tartalmaznia."
+  missing: "A(z) :attribute mezőnek hiányoznia kell."
+  missing_if: "A(z) :attribute mezőnek hiányoznia kell, amikor :other értéke :value."
+  missing_unless: "A(z) :attribute mezőnek hiányoznia kell, kivéve ha :other értéke :value."
+  missing_with: "A(z) :attribute mezőnek hiányoznia kell, amikor :values jelen van."
+  missing_with_all: "A(z) :attribute mezőnek hiányoznia kell, amikor :values jelen vannak."
+  multiple_of: "A(z) :attribute mezőnek :value többszörösének kell lennie."
+  not_in: "A kiválasztott :attribute érvénytelen."
+  not_regex: "A(z) :attribute mező formátuma érvénytelen."
+  numeric: "A(z) :attribute mezőnek számnak kell lennie."
+  password:
+    letters: "A(z) :attribute mezőnek legalább egy betűt kell tartalmaznia."
+    mixed: "A(z) :attribute mezőnek legalább egy nagy- és egy kisbetűt kell tartalmaznia."
+    numbers: "A(z) :attribute mezőnek legalább egy számot kell tartalmaznia."
+    symbols: "A(z) :attribute mezőnek legalább egy szimbólumot kell tartalmaznia."
+    uncompromised: "A megadott :attribute adatszivárgásban szerepelt. Kérlek válassz másik :attribute értéket."
+  present: "A(z) :attribute mezőnek jelen kell lennie."
+  present_if: "A(z) :attribute mezőnek jelen kell lennie, amikor :other értéke :value."
+  present_unless: "A(z) :attribute mezőnek jelen kell lennie, kivéve ha :other értéke :value."
+  present_with: "A(z) :attribute mezőnek jelen kell lennie, amikor :values jelen van."
+  present_with_all: "A(z) :attribute mezőnek jelen kell lennie, amikor :values jelen vannak."
+  prohibited: "A(z) :attribute mező tiltott."
+  prohibited_if: "A(z) :attribute mező tiltott, amikor :other értéke :value."
+  prohibited_unless: "A(z) :attribute mező tiltott, kivéve ha :other értéke a következők egyike: :values."
+  prohibits: "A(z) :attribute mező tiltja :other jelenlétét."
+  regex: "A(z) :attribute mező formátuma érvénytelen."
+  required: "A(z) :attribute mező kötelező."
+  required_array_keys: "A(z) :attribute mezőnek tartalmaznia kell bejegyzéseket a következőkhöz: :values."
+  required_if: "A(z) :attribute mező kötelező, amikor :other értéke :value."
+  required_if_accepted: "A(z) :attribute mező kötelező, amikor :other el van fogadva."
+  required_unless: "A(z) :attribute mező kötelező, kivéve ha :other értéke a következők egyike: :values."
+  required_with: "A(z) :attribute mező kötelező, amikor :values jelen van."
+  required_with_all: "A(z) :attribute mező kötelező, amikor :values jelen vannak."
+  required_without: "A(z) :attribute mező kötelező, amikor :values nincs jelen."
+  required_without_all: "A(z) :attribute mező kötelező, amikor :values egyike sincs jelen."
+  same: "A(z) :attribute mezőnek egyeznie kell a(z) :other mezővel."
+  size:
+    array: "A(z) :attribute mezőnek :size elemet kell tartalmaznia."
+    file: "A(z) :attribute mezőnek :size kilobájtnak kell lennie."
+    numeric: "A(z) :attribute mezőnek :size értékűnek kell lennie."
+    string: "A(z) :attribute mezőnek :size karakterből kell állnia."
+  starts_with: "A(z) :attribute mezőnek a következők egyikével kell kezdődnie: :values."
+  string: "A(z) :attribute mezőnek szövegnek kell lennie."
+  timezone: "A(z) :attribute mezőnek érvényes időzónának kell lennie."
+  unique: "A(z) :attribute már foglalt."
+  uploaded: "A(z) :attribute feltöltése sikertelen."
+  uppercase: "A(z) :attribute mezőnek nagybetűsnek kell lennie."
+  url: "A(z) :attribute mezőnek érvényes URL-nek kell lennie."
+  ulid: "A(z) :attribute mezőnek érvényes ULID-nek kell lennie."
+  uuid: "A(z) :attribute mezőnek érvényes UUID-nek kell lennie."
+  attributes:
+    username: felhasználónév
+    password: jelszó
+    email: email
+    title: cím
+    content: tartalom
+    name_singular: egyes számú név
+    name_plural: többes számú név
+    tag_count_primary: elsődleges címkék száma
+    tag_count_secondary: másodlagos címkék száma
+flarum-flags:
+  admin:
+    permissions:
+      flag_posts_label: Hozzászólások jelentése
+      view_flags_label: Jelentett hozzászólások megtekintése
+    settings:
+      flag_own_posts_label: Engedélyezd a felhasználóknak saját hozzászólásaik jelentését
+      guidelines_url_label: Közösségi irányelvek URL
+      title: Jelentések beállításai
+  forum:
+    flag_post:
+      confirmation_message: Köszönjük, hogy jelentetted ezt a hozzászólást. Moderátoraink megvizsgálják.
+      dismiss_button: => core.ref.okay
+      reason_details_placeholder: További részletek (opcionális)
+      reason_inappropriate_label: Nem megfelelő
+      reason_inappropriate_text: Ez a hozzászólás sértő, bántó, vagy sérti a <a>közösségi irányelveinket</a>.
+      reason_missing_message: Kérlek adj meg néhány részletet a moderátorainknak.
+      reason_off_topic_label: Témán kívüli
+      reason_off_topic_text: Ez a hozzászólás nem releváns a jelenlegi beszélgetéshez és máshova kellene áthelyezni.
+      reason_other_label: Egyéb (kérlek részletezd)
+      reason_spam_label: Spam
+      reason_spam_text: Ez a hozzászólás hirdetés.
+      submit_button: => flarum-flags.ref.flag_post
+      title: => flarum-flags.ref.flag_post
+    flagged_posts:
+      empty_text: Nincsenek jelentések
+      item_text: "{username} a(z) <em>{discussion}</em> beszélgetésben"
+      title: => flarum-flags.ref.flagged_posts
+      tooltip: => flarum-flags.ref.flagged_posts
+    post:
+      dismiss_flag_button: Jelentés elvetése
+      flagged_by_text: "{username} jelentette"
+      flagged_by_with_reason_text: "{username} jelentette mint {reason}"
+    post_controls:
+      flag_button: Jelentés
+  ref:
+    flag_post: Hozzászólás jelentése
+    flagged_posts: Jelentett hozzászólások
+flarum-approval:
+  admin:
+    permissions:
+      approve_posts_label: Hozzászólások jóváhagyása
+      reply_without_approval_label: Válasz beszélgetésekre jóváhagyás nélkül
+      start_discussions_without_approval_label: Beszélgetések indítása jóváhagyás nélkül
+  forum:
+    badge:
+      awaiting_approval_tooltip: => flarum-approval.ref.awaiting_approval
+    post:
+      awaiting_approval_text: => flarum-approval.ref.awaiting_approval
+    post_controls:
+      approve_button: Jóváhagyás
+  ref:
+    awaiting_approval: Jóváhagyásra vár
+flarum-tags:
+  admin:
+    basics:
+      tags_label: => flarum-tags.ref.tags
+    edit_tag:
+      color_label: => core.ref.color
+      delete_tag_button: Címke törlése
+      delete_tag_confirmation: Biztosan törölni szeretnéd ezt a címkét? A címke beszélgetései NEM lesznek törölve.
+      description_label: Leírás
+      hide_label: Elrejtés az Összes beszélgetésből
+      icon_label: => core.ref.icon
+      icon_text: => core.ref.icon_text
+      name_label: => flarum-tags.ref.name
+      name_placeholder: => flarum-tags.ref.name
+      slug_label: Slug
+      submit_button: => core.ref.save_changes
+      title: Címke létrehozása
+    nav:
+      tags_button: => flarum-tags.ref.tags
+      tags_text: A beszélgetések rendszerezéséhez használható címkék listájának kezelése.
+    permissions:
+      allow_edit_tags_label: Címke szerkesztés engedélyezése
+      bypass_tag_counts_label: Címke követelmények megkerülése
+      restrict_by_tag_heading: Korlátozás címke szerint
+      tag_discussions_label: Beszélgetések címkézése
+    settings:
+      button_text: => flarum-tags.ref.choose_tags
+    tag_settings:
+      range_separator_text: " - "
+      required_primary_heading: Szükséges elsődleges címkék száma
+      required_primary_text: Add meg a beszélgetésre alkalmazható elsődleges címkék minimum és maximum számát.
+      required_secondary_heading: Szükséges másodlagos címkék száma
+      required_secondary_text: Add meg a beszélgetésre alkalmazható másodlagos címkék minimum és maximum számát.
+      title: Címke beállítások
+    tags:
+      about_tags_text: A címkék a beszélgetések kategorizálására szolgálnak. Az elsődleges címkék olyanok, mint a hagyományos fórum kategóriák: kétszintű hierarchiában rendezhetők. A másodlagos címkéknek nincs hierarchiájuk vagy sorrendjük, és hasznosak a mikro-kategorizáláshoz.
+      create_primary_tag_button: Elsődleges címke létrehozása
+      create_secondary_tag_button: Másodlagos címke létrehozása
+      edit_tag_label: "{tag} címke szerkesztése"
+      primary_heading: Elsődleges címkék
+      secondary_heading: Másodlagos címkék
+      settings_heading: Beállítások
+  forum:
+    all_tags:
+      meta_description_text: Összes címke
+      meta_title_text: => flarum-tags.ref.tags
+    choose_tags:
+      edit_title: "Címkék szerkesztése ehhez: {title}"
+      title: Válassz címkéket a beszélgetésedhez
+    composer_discussion:
+      choose_tags_link: => flarum-tags.ref.choose_tags
+    discussion_controls:
+      edit_tags_button: Címkék szerkesztése
+    header:
+      back_to_tags_tooltip: Vissza a címkelistához
+    index:
+      more_link: Továbbiak...
+      tags_link: => flarum-tags.ref.tags
+      untagged_link: Címkézetlen
+    post_stream:
+      added_and_removed_tags_text: "{username} hozzáadta a(z) {tagsAdded} és eltávolította a(z) {tagsRemoved} címkéket {time}."
+      added_tags_text: "{username} hozzáadta a(z) {tagsAdded} címkéket {time}."
+      removed_tags_text: "{username} eltávolította a(z) {tagsRemoved} címkéket {time}."
+      tags_text: "{count, plural, one {{tags} címke} other {{tags} címke}}"
+    tag:
+      meta_description_text: "Minden beszélgetés a(z) {tag} címkével"
+  lib:
+    deleted_tag_text: Törölve
+    gambits:
+      discussions:
+        tag:
+          key: címke
+          hint: címke neve, vagy vesszővel elválasztott címkenevek listája, vagy "címkézetlen"
+    tag_selection_modal:
+      bypass_requirements: Címke követelmények megkerülése
+      choose_primary_placeholder: "{count, plural, one {Válassz egy elsődleges címkét} other {Válassz # elsődleges címkét}}"
+      choose_secondary_placeholder: => flarum-tags.ref.choose_tags_placeholder
+      choose_tags_placeholder: => flarum-tags.ref.choose_tags_placeholder
+      submit_button: => core.ref.okay
+      title: => flarum-tags.ref.choose_tags
+  ref:
+    choose_tags: Válassz címkéket
+    choose_tags_placeholder: "{count, plural, one {Válassz még 1 címkét} other {Válassz még # címkét}}"
+    name: Név
+    tags: Címkék
+flarum-suspend:
+  admin:
+    permissions:
+      suspend_users_label: Felhasználók felfüggesztése
+  forum:
+    notifications:
+      user_suspended_text: "Fel lettél függesztve {timeReadable} időtartamra"
+      user_suspended_indefinite_text: Határozatlan időre fel lettél függesztve
+      user_unsuspended_text: A felfüggesztésed feloldva lett
+    suspension_info:
+      dismiss_button: Elvetés
+      indefinite: Ez egy határozatlan idejű felfüggesztés
+      limited: "Ez a felfüggesztés {date} dátumig érvényes"
+      title: Ez a fiók fel van függesztve
+    suspend_user:
+      display_message: Üzenet megjelenítése a felhasználónak
+      indefinitely_label: Határozatlan időre felfüggesztve
+      limited_time_days_text: " nap"
+      limited_time_label: Meghatározott időre felfüggesztve...
+      not_suspended_label: Nincs felfüggesztve
+      placeholder_optional: Opcionális
+      reason: Felfüggesztés oka
+      status_heading: Felfüggesztés állapota
+      submit_button: => core.ref.save_changes
+      title: "{username} felfüggesztése"
+    user_badge:
+      suspended_tooltip: Felfüggesztve
+    user_controls:
+      suspend_button: Felfüggesztés
+  email:
+    no_reason_given: Nem adtak meg okot a felfüggesztéshez.
+    suspended:
+      subject: A fiókod fel lett függesztve
+      plain:
+        body: |
+          Fel lettél függesztve a következő okból:
+          
+          ---
+          {suspension_message}
+          ---
+          
+      html:
+        body: "Fel lettél függesztve a(z) {forumTitle} fórumról a következő okból:"
+    unsuspended:
+      subject: A fiókod felfüggesztése feloldva lett
+      plain:
+        body: |
+          A felfüggesztésed feloldva lett. Visszatérhetsz a fórumra a következő linkre kattintva:
+          
+          {forum_url}
+          
+      html:
+        body: "A felfüggesztésed feloldva lett. Visszatérhetsz a [{forumTitle}]({forum_url}) fórumra, amikor készen állsz."
+  lib:
+    gambits:
+      users:
+        suspended:
+          key: felfüggesztve
+flarum-subscriptions:
+  forum:
+    badge:
+      following_tooltip: => flarum-subscriptions.ref.following
+      ignoring_tooltip: => flarum-subscriptions.ref.ignoring
+    discussion_controls:
+      follow_button: => flarum-subscriptions.ref.follow
+      unfollow_button: Követés leállítása
+      unignore_button: Figyelmen kívül hagyás visszavonása
+    following:
+      meta_title_text: => flarum-subscriptions.ref.following
+    index:
+      following_link: => flarum-subscriptions.ref.following
+    notifications:
+      new_post_text: "{username} hozzászólt"
+    settings:
+      follow_after_reply_label: Automatikusan kövessem azokat a beszélgetéseket, amikre válaszolok
+      notify_for_all_posts_label: Értesítés minden új hozzászólásról, nem csak a legutolsóról a beszélgetésben
+      notify_new_post_label: Valaki hozzászól egy általam követett beszélgetéshez
+    sub_controls:
+      follow_button: => flarum-subscriptions.ref.follow
+      following_button: => flarum-subscriptions.ref.following
+      following_text: Értesítés minden válaszról.
+      ignoring_button: => flarum-subscriptions.ref.ignoring
+      ignoring_text: Soha ne értesíts. Elrejtés a beszélgetéslistából.
+      not_following_button: Nem követed
+      not_following_text: Csak akkor értesíts, ha @megemlítenek.
+      notify_alert_tooltip: Fórum értesítés kérése új hozzászólásokról
+      notify_email_tooltip: Email kérése új hozzászólásokról
+  email:
+    new_post:
+      subject: "[Új hozzászólás] {title}"
+      plain:
+        body: |
+          {poster_display_name} hozzászólt egy általad követett beszélgetéshez: "{title}."
+          
+          Az új aktivitás megtekintéséhez látogasd meg a következő linket:
+          {url}
+          
+          ---
+          
+          {content}
+          
+          ---
+          
+          Nem kapsz több értesítést erről a beszélgetésről, amíg nem olvasod el.
+          
+      html:
+        body: |
+          {poster_display_name} hozzászólt egy általad követett beszélgetéshez: "[{title}]({url})."
+          
+          Nem kapsz több értesítést erről a beszélgetésről, amíg nem olvasod el.
+          
+  lib:
+    gambits:
+      discussions:
+        subscription:
+          following_key: követés
+          ignoring_key: figyelmen kívül hagyás
+  ref:
+    follow: Követés
+    following: Követed
+    ignoring: Figyelmen kívül hagyás
+flarum-sticky:
+  admin:
+    settings:
+      enable_display_excerpt: Mutasd az első hozzászólás kivonatát, amikor egy kiemelt beszélgetés olvasatlan
+      only_sticky_unread_discussions_label: Csak kiemelt olvasatlan beszélgetések
+      only_sticky_unread_discussions_help: Az Összes beszélgetés oldalon az olvasatlan kiemelt beszélgetések a tetejére kerülnek, míg az olvasott kiemelt beszélgetések a normál sorrendet követik.
+    permissions:
+      sticky_discussions_label: Beszélgetések kiemelése
+  forum:
+    badge:
+      sticky_tooltip: => flarum-sticky.ref.sticky
+    discussion_controls:
+      sticky_button: => flarum-sticky.ref.sticky
+      unsticky_button: Kiemelés megszüntetése
+    post_stream:
+      discussion_stickied_text: "{username} kiemelte a beszélgetést {time}."
+      discussion_unstickied_text: "{username} megszüntette a beszélgetés kiemelését {time}."
+  lib:
+    gambits:
+      discussions:
+        sticky:
+          key: kiemelt
+  ref:
+    sticky: Kiemelt
+flarum-statistics:
+  admin:
+    date_selection_modal:
+      description: |
+        Válassz egyéni dátumtartományt a statisztikák megjelenítéséhez. Az adatok betöltése
+        több percet is igénybe vehet nagy aktivitású fórumokon.
+        
+      end_date: Záró dátum (bezárólag)
+      errors:
+        end_before_start: A záró dátumnak a kezdő dátum után kell lennie.
+      start_date: Kezdő dátum (bezárólag)
+      submit_button: Dátumtartomány megerősítése
+      title: Egyéni dátumtartomány választása
+    statistics:
+      discussions_heading: => core.ref.discussions
+      export_chart_button: Diagram exportálása SVG-be
+      last_12_months_label: Utolsó 12 hónap
+      last_28_days_label: Utolsó 28 nap
+      last_7_days_label: Utolsó 7 nap
+      mini_heading: Fórum statisztikák
+      previous_28_days_label: Előző 28 nap
+      previous_7_days_label: Előző 7 nap
+      custom_label: Egyéni tartomány választása...
+      custom_label_specified: "{fromDate} - {toDate}"
+      loading: => core.ref.loading
+      posts_heading: => core.ref.posts
+      today_label: Ma
+      total_label: Összesen
+      users_heading: => core.ref.users
+      view_full: További statisztikák megtekintése
+      no_data: Nincs elérhető adat ehhez a dátumtartományhoz.
+      current_period: Jelenlegi időszak
+      previous_period: Előző időszak
+flarum-messages:
+  admin:
+    permissions:
+      send_messages_label: Privát üzenetek küldése
+      delete_own_messages_label: Saját üzenetek törlése
+  forum:
+    composer:
+      discard_confirmation: Nem küldted el az üzenetedet. Biztosan el szeretnéd vetni?
+      placeholder: Írj egy üzenetet...
+      recipients: Címzettek
+      submit_button: Üzenet küldése
+      to: "Címzett:"
+    dialog_list:
+      load_more_button: => core.ref.load_more
+      mark_as_read_tooltip: Megjelölés olvasottként
+      title: Üzenetek
+      view_all: Összes üzenet megtekintése
+    dialog_section:
+      back_label: Vissza
+      cannot_reply_text: Ez a felhasználó nem tud válaszolni
+      controls:
+        details_button: Részletek
+      controls_toggle_label: Párbeszéd vezérlő műveletek
+      details_modal:
+        created_at: Létrehozás dátuma
+        recipients: Résztvevők
+        title: Beszélgetés részletei
+    header:
+      dropdown_tooltip: Üzenetek
+    index:
+      messages_link: Üzenetek
+    index_sort:
+      latest_button: Legújabb
+      newest_button: Legfrissebb
+      oldest_button: Legrégebbi
+    message_controls:
+      delete_button: Törlés
+      delete_confirmation: Biztosan törölni szeretnéd ezt az üzenetet? Ez a művelet nem visszavonható.
+    messages_page:
+      cannot_send_message_button: Nem küldhetsz üzenetet
+      empty_text: Nincsenek új üzenetek
+      hero:
+        title: Üzenetek
+        subtitle: Privát beszélgetéseid más felhasználókkal
+      mark_all_as_read_tooltip: Összes megjelölése olvasottként
+      refresh_tooltip: Frissítés
+      send_message_button: Üzenet küldése
+      stream:
+        load_previous_button: Korábbi üzenetek betöltése
+        load_next_button: Következő üzenetek betöltése
+        start_of_the_conversation: Beszélgetés kezdete
+        time_lapsed_text: => core.forum.post_stream.time_lapsed_text
+      title: Üzenetek
+    recipient_selection_modal:
+      title: Válaszd ki az üzenet címzettjeit
+    settings:
+      notify_message_received_label: Valaki üzenetet küld nekem
+    user_controls:
+      send_message_button: Üzenet küldése
+      cannot_reply_text: Ez a felhasználó nem tud válaszolni
+    notifications:
+      message_received_text: "Üzenet érkezett {user} felhasználótól"
+  email:
+    message_received:
+      subject: "{user_display_name} üzenetet küldött neked"
+      plain:
+        body: |
+          {user_display_name} új üzenetet küldött neked.
+          
+          {url}
+          
+          ---
+          
+          {content}
+          
+      html:
+        body: "{user_display_name} [új üzenetet]({url}) küldött neked."
+  lib:
+    dialog:
+      title: "Üzenetváltás {username} felhasználóval"
+flarum-mentions:
+  admin:
+    permissions:
+      mention_groups_label: Csoportok említése
+    settings:
+      allow_username_format_label: Felhasználónév említés formátum engedélyezése (@Felhasználónév)
+      allow_username_format_text: |
+        A felhasználó említések jelenlegi formátuma @"Megjelenítendő név"#ID.
+        Ez a beállítás engedélyezi a régi @Felhasználónév formátum használatát, de mentéskor továbbra is az új formátumra konvertálódik.
+        
+  forum:
+    composer:
+      mention_tooltip: Említs meg egy felhasználót, csoportot vagy hozzászólást
+      reply_to_post_text: "Válasz a #{number} hozzászólásra"
+    mentioned_by:
+      title: Válaszok erre a hozzászólásra
+      load_more_button: => core.ref.load_more
+    notifications:
+      others_text: => core.ref.some_others
+      post_mentioned_text: "{username} válaszolt a hozzászólásodra"
+      user_mentioned_text: "{username} megemlített téged"
+      group_mentioned_text: "{username} megemlített egy csoportot, aminek tagja vagy"
+    post:
+      mentioned_by_more_text: "{count} további válasz."
+      mentioned_by_self_text: "{users} válaszolt erre."
+      mentioned_by_text: "{users} válaszolt erre."
+      others_text: => core.ref.some_others
+      quote_button: Idézés
+      reply_link: => core.ref.reply
+      you_text: => core.ref.you
+    settings:
+      notify_post_mentioned_label: Valaki válaszol egy hozzászólásomra
+      notify_user_mentioned_label: Valaki megemlít engem egy hozzászólásban
+      notify_group_mentioned_label: Valaki megemlít egy csoportot, aminek tagja vagyok
+    user:
+      mentions_link: Említések
+    post_mention:
+      deleted_text: [ismeretlen]
+    group_mention:
+      deleted_text: [ismeretlen csoport]
+  email:
+    post_mentioned:
+      subject: "{replier_display_name} válaszolt a hozzászólásodra itt: {title}"
+      plain:
+        body: |
+          {replier_display_name} válaszolt a hozzászólásodra (#{post_number}) itt: "{title}."
+          
+          {url}
+          
+          ---
+          
+          {content}
+          
+      html
