@@ -16,9 +16,12 @@
         "source": "https://github.com/manaszon/flarum-ext-hungarian"
     },
     "require": {
-        "flarum/core": "^0.1.0-beta.8"
+        "flarum/core": "^2.0.0-beta.3"
     },
     "extra": {
+        "branch-alias": {
+            "dev-main": "2.x-dev"
+        },
         "flarum-extension": {
             "title": "Hungarian",
             "icon": {
