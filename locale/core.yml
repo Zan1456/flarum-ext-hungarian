@@ -446,7 +446,7 @@ flarum-extension-manager:
       add_label: Új hitelesítési módszer
       add_modal:
         host_label: Kiszolgáló
-        host_placeholder: példa: bearer.flarum.org
+        host_placeholder: "példa: bearer.flarum.org"
         submit_button: Küldés
         token_label: Token
         type_label: Típus
@@ -536,7 +536,7 @@ flarum-extension-manager:
     minor_update_confirmation:
       content: Ez frissíti az összes többi bővítményt/csomagot is, amikhez elérhető frissítés.
     required_php_functions: |
-      "A bővítménykezelő a következő PHP függvények engedélyezését igényli: <code>{functions}</code>. Ha nincs hozzáférésed a PHP konfigurációhoz, kérlek lépj kapcsolatba a tárhelyszolgáltatóddal."
+      A bővítménykezelő a következő PHP függvények engedélyezését igényli: "<code>{functions}</code>. Ha nincs hozzáférésed a PHP konfigurációhoz, kérlek lépj kapcsolatba a tárhelyszolgáltatóddal."
       
     sections:
       discover:
@@ -629,7 +629,7 @@ flarum-extension-manager:
 flarum-bbcode:
   forum:
     quote:
-      wrote: írta_option: HTML
+      wrote: "írta"
       format_heading: Kimenő email formátum
       format_help: Válaszd ki a kimenő emailek formátumát. Az ajánlott opció a <code>multipart</code>, mivel ez lehetővé teszi a felhasználó email kliensének a legmegfelelőbb formátum megjelenítését.
       from_label: Küldő
@@ -984,7 +984,7 @@ flarum-bbcode:
         dark_mode_label: => core.ref.dark_mode_label
         light_hc_mode_label: => core.ref.light_hc_mode_label
         light_mode_label: => core.ref.light_mode_label
-      notification_checkbox_a11y_label_template: "{description} értesítések fogadása {method} módszerrel"
+      notification_checkbox_a11y_label_template: "{description}" értesítések fogadása {method} módszerrel
       notifications_heading: => core.ref.notifications
       notify_by_email_heading: => core.ref.email
       notify_by_web_heading: Web
@@ -1132,10 +1132,10 @@ flarum-bbcode:
       search_clear_button_accessible_label: Keresési lekérdezés törlése
     search_source:
       discussions:
-        all_button: "Keresés minden beszélgetésben: {query}"
+        all_button: Keresés minden beszélgetésben: "{query}"
         heading: => core.ref.discussions
       posts:
-        all_button: "Keresés minden hozzászólásban: {query}"
+        all_button: Keresés minden hozzászólásban: "{query}"
         heading: => core.ref.posts
       users:
         heading: => core.ref.users
@@ -1590,7 +1590,7 @@ flarum-tags:
       required_secondary_text: Add meg a beszélgetésre alkalmazható másodlagos címkék minimum és maximum számát.
       title: Címke beállítások
     tags:
-      about_tags_text: A címkék a beszélgetések kategorizálására szolgálnak. Az elsődleges címkék olyanok, mint a hagyományos fórum kategóriák: kétszintű hierarchiában rendezhetők. A másodlagos címkéknek nincs hierarchiájuk vagy sorrendjük, és hasznosak a mikro-kategorizáláshoz.
+      about_tags_text: "A címkék a beszélgetések kategorizálására szolgálnak. Az elsődleges címkék olyanok, mint a hagyományos fórum kategóriák: kétszintű hierarchiában rendezhetők. A másodlagos címkéknek nincs hierarchiájuk vagy sorrendjük, és hasznosak a mikro-kategorizáláshoz."
       create_primary_tag_button: Elsődleges címke létrehozása
       create_secondary_tag_button: Másodlagos címke létrehozása
       edit_tag_label: "{tag} címke szerkesztése"
